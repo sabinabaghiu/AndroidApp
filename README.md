@@ -25,4 +25,4 @@ Could have requirements
 
 Won't have requirements
 
-10. As a user, I don't want other people to have access to my schedule.
+10. As a user, I want other people to have access to my schedule.
