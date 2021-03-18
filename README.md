@@ -15,8 +15,8 @@ Must have requirements
 
 Should have requirements
 
-6. As a user, I want to have statistics so that I can see may progress.
-7. As a user, As a user, I want to have categories so that I can find my tasks more easily.
+6. As a user, I want to have statistics so that I can see my progress.
+7. As a user, I want to have categories so that I can find my tasks more easily.
 8. As a user, I want to set the prority of my tasks so that I know what I should do first.
 
 Could have requirements
