@@ -12,18 +12,19 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/todo"
+            android:id="@+id/todo_today"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="Call Mike - 20 min"
-            android:textSize="25dp" />
+            android:textSize="15dp" />
 
 
     </TableLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/icon_today"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_weight="1"

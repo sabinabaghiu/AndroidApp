@@ -7,27 +7,29 @@
     android:orientation="horizontal">
 
     <TableLayout
-        android:layout_width="296dp"
+        android:layout_width="273dp"
         android:layout_height="wrap_content"
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/habit"
-            android:layout_width="315dp"
+            android:id="@+id/habit_today"
+            android:layout_width="243dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="No chocolate 30 days"
-            android:textSize="25dp" />
+            android:textColor="@color/black"
+            android:textSize="15dp" />
 
 
     </TableLayout>
 
     <CheckBox
         android:id="@+id/checkBox_habit_done"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_width="166dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
-        android:text="Done" />
+        android:layout_weight="1"
+        android:text="Done"
+        android:textColor="@color/black" />
 
 </LinearLayout>
