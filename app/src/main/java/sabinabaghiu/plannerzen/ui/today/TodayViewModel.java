@@ -1,19 +1,31 @@
 package sabinabaghiu.plannerzen.ui.today;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TodayViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+public class TodayViewModel extends AndroidViewModel {
 
-    public TodayViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+    private final HabitRepository habitRepository;
+    private final TodoRepository todoRepository;
+
+    public TodayViewModel(Application application) {
+        super(application);
+        habitRepository = HabitRepository.getInstance(application);
+        todoRepository = TodoRepository.getInstance(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Habit>> getAllHabits() {
+        return habitRepository.getAllHabits();
     }
+
+    public LiveData<List<Todo>> getAllTodos() {
+        return todoRepository.getAllTodos();
+    }
+
 }

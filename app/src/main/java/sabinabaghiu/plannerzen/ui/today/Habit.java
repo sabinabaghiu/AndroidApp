@@ -1,6 +1,12 @@
 package sabinabaghiu.plannerzen.ui.today;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "habit_table")
 public class Habit {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String title;
     private int goal;
     private int iconId;
@@ -12,7 +18,15 @@ public class Habit {
         this.goal = goal;
         this.iconId = iconId;
         this.isDone = isDone;
-        this.count = count;
+        this.count = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
