@@ -3,24 +3,29 @@ package sabinabaghiu.plannerzen.ui.today;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
+@Entity(tableName = "todo_table")
 public class Todo {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String title;
     private String description;
     private int time;
     private boolean isImportant;
     private String category;
-    private LocalDate date;
     private int day;
     private int month;
     private int year;
     private int icon;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public Todo(String title, String description, int time, boolean isImportant, String category, LocalDate date, int day, int month, int year) {
+    @Ignore
+    public Todo(String title, String description, int time, boolean isImportant, String category, int day, int month, int year) {
         this.title = title;
         this.description = description;
         this.time = time;
@@ -29,7 +34,6 @@ public class Todo {
         this.day = day;
         this.month = month;
         this.year = year;
-        this.date = LocalDate.of(year, month, day);
     }
 
     public Todo(String title, int time, boolean isImportant)
@@ -37,6 +41,14 @@ public class Todo {
         this.title = title;
         this.time = time;
         this.isImportant = isImportant;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -77,15 +89,6 @@ public class Todo {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setDate(int year, int month, int day) {
-        this.date = LocalDate.of(year, month, day);
     }
 
     public int getDay() {
