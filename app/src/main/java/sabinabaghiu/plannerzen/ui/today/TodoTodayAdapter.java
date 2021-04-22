@@ -13,24 +13,24 @@ import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
+public class TodoTodayAdapter extends RecyclerView.Adapter<TodoTodayAdapter.ViewHolder> {
 
     private ArrayList<Todo> todos;
 
-    TodoAdapter(ArrayList<Todo> todos){
+    TodoTodayAdapter(ArrayList<Todo> todos){
         this.todos = todos;
     }
 
     @NonNull
     @Override
-    public TodoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodoTodayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.todo_list_item_today, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TodoTodayAdapter.ViewHolder holder, int position) {
         holder.title.setText(todos.get(position).getTitle() + " - " + todos.get(position).getTime() + " min");
         if (todos.get(position).isImportant())
             holder.icon.setImageResource(todos.get(position).getIcon());

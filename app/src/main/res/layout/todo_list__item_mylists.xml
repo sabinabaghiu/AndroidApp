@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/todo_item_today"
+    android:id="@+id/todo_item_mylist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -12,23 +12,41 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/todo_today"
+            android:id="@+id/todo_title"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:text="Call Mike - 20 min"
+            android:text="Good day"
             android:textSize="15dp" />
 
+        <TextView
+            android:id="@+id/todo_date"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:text="05.05.2021"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/todo_description"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:text="It is a busy day"
+            android:textSize="15dp" />
 
     </TableLayout>
 
     <ImageView
-        android:id="@+id/icon_today"
+        android:id="@+id/icon_todo_mylist"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:src="@drawable/ic_baseline_priority_high_24" />
+
 
 </LinearLayout>

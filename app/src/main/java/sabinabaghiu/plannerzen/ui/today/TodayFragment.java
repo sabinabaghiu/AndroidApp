@@ -23,8 +23,8 @@ public class TodayFragment extends Fragment {
     private RecyclerView habitRecyclerView;
     private TextView todoTextView;
     private TextView habitTextView;
-    TodoAdapter todoAdapter;
-    HabitAdapter habitAdapter;
+    TodoTodayAdapter todoTodayAdapter;
+    HabitTodayAdapter habitTodayAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +41,8 @@ public class TodayFragment extends Fragment {
             if (!todos.isEmpty()) {
                 for (Todo t : todos) {
                     todoRecyclerView.setVisibility(View.VISIBLE);
-                    todoAdapter = new TodoAdapter((ArrayList<Todo>) todos);
-                    todoRecyclerView.setAdapter(todoAdapter);
+                    todoTodayAdapter = new TodoTodayAdapter((ArrayList<Todo>) todos);
+                    todoRecyclerView.setAdapter(todoTodayAdapter);
                     todoTextView.setVisibility(View.GONE);
                 }
             } else {
@@ -60,8 +60,8 @@ public class TodayFragment extends Fragment {
             if (!habits.isEmpty()) {
                 for (Habit h : habits) {
                     habitRecyclerView.setVisibility(View.VISIBLE);
-                    habitAdapter = new HabitAdapter((ArrayList<Habit>) habits);
-                    habitRecyclerView.setAdapter(habitAdapter);
+                    habitTodayAdapter = new HabitTodayAdapter((ArrayList<Habit>) habits);
+                    habitRecyclerView.setAdapter(habitTodayAdapter);
                     habitTextView.setVisibility(View.GONE);
                 }
             } else {
