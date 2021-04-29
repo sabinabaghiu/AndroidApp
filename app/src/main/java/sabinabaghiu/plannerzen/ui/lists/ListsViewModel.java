@@ -18,13 +18,13 @@ public class ListsViewModel extends AndroidViewModel {
 
     private final TodoRepository todoRepository;
     private final HabitRepository habitRepository;
-//    private final ReminderRepository reminderRepository;
+    private final ReminderRepository reminderRepository;
 
     public ListsViewModel(Application application) {
         super(application);
         todoRepository = TodoRepository.getInstance(application);
         habitRepository = HabitRepository.getInstance(application);
-//        reminderRepository = ReminderRepository.getInstance(application);
+        reminderRepository = ReminderRepository.getInstance(application);
     }
 
     public LiveData<List<Todo>> getAllTodos() {
@@ -35,7 +35,7 @@ public class ListsViewModel extends AndroidViewModel {
         return habitRepository.getAllHabits();
     }
 
-//    public LiveData<List<Reminder>> getAllReminders() {
-//        return reminderRepository.getAllReminders();
-//    }
+    public LiveData<List<Reminder>> getAllReminders() {
+        return reminderRepository.getAllReminders();
+    }
 }

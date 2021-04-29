@@ -45,7 +45,7 @@ public class ReminderRepository {
         executorService.execute(() -> reminderDAO.delete(reminder));
     }
 
-    public void deleteAllHabits() {
+    public void deleteAllReminders() {
         executorService.execute(reminderDAO::deleteAllReminders);
     }
 }
