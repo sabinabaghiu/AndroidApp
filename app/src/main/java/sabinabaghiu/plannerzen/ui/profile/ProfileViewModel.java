@@ -1,19 +1,30 @@
 package sabinabaghiu.plannerzen.ui.profile;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ProfileViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+import sabinabaghiu.plannerzen.ui.today.Habit;
+import sabinabaghiu.plannerzen.ui.today.HabitRepository;
+import sabinabaghiu.plannerzen.ui.today.Todo;
+import sabinabaghiu.plannerzen.ui.today.TodoRepository;
 
-    public ProfileViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+public class ProfileViewModel extends AndroidViewModel {
+
+    private final HabitRepository habitRepository;
+
+    public ProfileViewModel(Application application) {
+        super(application);
+        habitRepository = HabitRepository.getInstance(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Habit>> getAllHabits() {
+        return habitRepository.getAllHabits();
     }
+
 }

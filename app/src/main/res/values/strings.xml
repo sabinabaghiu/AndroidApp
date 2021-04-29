@@ -5,4 +5,34 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="category_prompt">Choose a category</string>
+    <string name="icon_prompt">Choose an icon</string>
+    <string name="reminder_days_prompt">Day of the week</string>
+    <string name="reminder_repeat_prompt">Repeat</string>
+
+    <string-array name="todo_list_category">
+        <item>Job</item>
+        <item>University</item>
+        <item>Vacation</item>
+        <item>Free day</item>
+    </string-array>
+    <string-array name="icon_habit">
+        <item>Book icon</item>
+        <item>Sun icon</item>
+        <item>Sport icon</item>
+    </string-array>
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="reminder_repeat">
+        <item>Every week</item>
+        <item>Every day</item>
+        <item>Every month</item>
+    </string-array>
 </resources>
