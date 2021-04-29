@@ -44,7 +44,7 @@ public class TodoRepository {
         executorService.execute(() -> todoDAO.delete(todo));
     }
 
-    public void deleteAllHabits() {
+    public void deleteAllTodos() {
         executorService.execute(todoDAO::deleteAllTodos);
     }
 }

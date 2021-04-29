@@ -1,19 +1,34 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(tableName = "reminder_table")
 public class Reminder {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String title;
-    private Date date;
+    private String date;
     private boolean isOn;
     private String repeat;
 
-    public Reminder(String title, Date date, boolean isOn, String repeat) {
+    public Reminder(String title, String date, boolean isOn, String repeat) {
         this.title = title;
         this.date = date;
         this.isOn = isOn;
         this.repeat = repeat;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -22,11 +37,11 @@ public class Reminder {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

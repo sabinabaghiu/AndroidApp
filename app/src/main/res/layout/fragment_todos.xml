@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/todos_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<!--    <include layout="@layout/fragment_lists"/>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/recyclerViewTodoMyLists"/>-->
+
+    <TextView
+        android:id="@+id/textViewNoTodoLists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="There are no lists to show"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
+
+</LinearLayout>
+
+
+
+
