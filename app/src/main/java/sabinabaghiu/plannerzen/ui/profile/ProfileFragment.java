@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,11 +70,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.logout){
-            Toast toast = Toast.makeText(getContext(), "Ahoy", Toast.LENGTH_SHORT);
-            toast.show();
+            signOut(getView());
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_sign_in);
             return true;
-//            Intent intent = new Intent(MainActivity.this, MainActivity1.class);
-//            startActivity(intent);
         } else return false;
+    }
+
+    public void signOut(View view){
+        profileViewModel.signOut();
     }
 }
