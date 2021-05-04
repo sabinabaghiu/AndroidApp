@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,19 +44,19 @@ public class HabitsFragment extends Fragment {
         habitTextView = root.findViewById(R.id.textViewNoHabitsLists);
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        listsViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-            if (!habits.isEmpty()) {
-                for (Habit h : habits) {
-                    habitRecyclerView.setVisibility(View.VISIBLE);
-                    habitListsAdapter = new HabitListsAdapter((ArrayList<Habit>) habits);
-                    habitRecyclerView.setAdapter(habitListsAdapter);
-                    habitTextView.setVisibility(View.GONE);
-                }
-            } else {
-                habitRecyclerView.setVisibility(View.GONE);
-                habitTextView.setVisibility(View.VISIBLE);
-            }
-        });
+//        listsViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
+//            if (!habits.isEmpty()) {
+//                for (Habit h : habits) {
+//                    habitRecyclerView.setVisibility(View.VISIBLE);
+//                    habitListsAdapter = new HabitListsAdapter((ArrayList<Habit>) habits);
+//                    habitRecyclerView.setAdapter(habitListsAdapter);
+//                    habitTextView.setVisibility(View.GONE);
+//                }
+//            } else {
+//                habitRecyclerView.setVisibility(View.GONE);
+//                habitTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
              //add button
         CoordinatorLayout coordinatorLayout = root.findViewById(R.id.coordinatorLayoutHabits);
@@ -63,7 +64,7 @@ public class HabitsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Ahoy2", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_add_habit);
             }
         });
         return root;

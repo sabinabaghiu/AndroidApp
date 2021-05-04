@@ -56,19 +56,19 @@ public class TodayFragment extends Fragment {
         habitTextView = root.findViewById(R.id.textViewNoHabitsToday);
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        todayViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-            if (!habits.isEmpty()) {
-                for (Habit h : habits) {
-                    habitRecyclerView.setVisibility(View.VISIBLE);
-                    habitTodayAdapter = new HabitTodayAdapter((ArrayList<Habit>) habits);
-                    habitRecyclerView.setAdapter(habitTodayAdapter);
-                    habitTextView.setVisibility(View.GONE);
-                }
-            } else {
-                habitRecyclerView.setVisibility(View.GONE);
-                habitTextView.setVisibility(View.VISIBLE);
-            }
-        });
+//        todayViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
+//            if (!habits.isEmpty()) {
+//                for (Habit h : habits) {
+//                    habitRecyclerView.setVisibility(View.VISIBLE);
+//                    habitTodayAdapter = new HabitTodayAdapter((ArrayList<Habit>) habits);
+//                    habitRecyclerView.setAdapter(habitTodayAdapter);
+//                    habitTextView.setVisibility(View.GONE);
+//                }
+//            } else {
+//                habitRecyclerView.setVisibility(View.GONE);
+//                habitTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         return root;
     }

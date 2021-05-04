@@ -7,8 +7,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
+import sabinabaghiu.plannerzen.ui.login.UserRepository;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 import sabinabaghiu.plannerzen.ui.today.HabitRepository;
 import sabinabaghiu.plannerzen.ui.today.Todo;
@@ -19,23 +22,30 @@ public class ListsViewModel extends AndroidViewModel {
     private final TodoRepository todoRepository;
     private final HabitRepository habitRepository;
     private final ReminderRepository reminderRepository;
+    private final UserRepository userRepository;
 
     public ListsViewModel(Application application) {
         super(application);
         todoRepository = TodoRepository.getInstance(application);
-        habitRepository = HabitRepository.getInstance(application);
+        habitRepository = HabitRepository.getInstance();
         reminderRepository = ReminderRepository.getInstance(application);
+        userRepository = UserRepository.getInstance(application);
     }
 
-    public LiveData<List<Todo>> getAllTodos() {
-        return todoRepository.getAllTodos();
+    public void init() {
+        String userId = userRepository.getCurrentUser().getValue().getUid();
+        habitRepository.init(userId);
     }
 
-    public LiveData<List<Habit>> getAllHabits() {
-        return habitRepository.getAllHabits();
+    public LiveData<FirebaseUser> getCurrentUser(){
+        return userRepository.getCurrentUser();
     }
 
-    public LiveData<List<Reminder>> getAllReminders() {
-        return reminderRepository.getAllReminders();
+    public LiveData<Habit> getHabit(){
+        return habitRepository.getHabit();
+    }
+
+    public void saveHabit(String title, int goal, int iconId, boolean isDone, int count){
+        habitRepository.saveHabit(title, goal, iconId, isDone, count);
     }
 }

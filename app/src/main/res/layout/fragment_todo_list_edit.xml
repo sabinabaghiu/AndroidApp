@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginTop="20dp"
         android:text="Title" />
 
     <EditText
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginTop="20dp"
         android:inputType="date"
         android:text="Date" />
 
@@ -22,12 +24,14 @@
         android:id="@+id/todo_edit_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:text="Description" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:id="@+id/todo_edit_recyclerView"
         />
 
@@ -35,6 +39,7 @@
         android:id="@+id/button_edit_add_task"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:text="ADD TASK" />
 
