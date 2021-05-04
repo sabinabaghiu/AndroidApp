@@ -70,32 +70,7 @@ public class ListsFragment extends Fragment  {
 
         adapter.addFragment(new TodosFragment(), "TO DO LISTS");
         adapter.addFragment(new HabitsFragment(), "HABITS");
-        adapter.addFragment(new RemindersFragment(), "REMINDERS");
         viewPager.setAdapter(adapter);
     }
 
-
-//    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        listsViewModel = new ViewModelProvider(this).get(ListsViewModel.class);
-//        View root = inflater.inflate(R.layout.fragment_lists, container, false);
-//
-//
-//        //maybe fab implementation here
-//
-//        FloatingActionButton fab = root.findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-//
-//        viewPager = root.findViewById(R.id.viewpager);
-//        viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-//        viewPager.setAdapter(viewPagerAdapter);
-//        tabLayout = root.findViewById(R.id.sliding_tabs);
-//        tabLayout.setupWithViewPager(viewPager);
-//
-//        return root;
 }

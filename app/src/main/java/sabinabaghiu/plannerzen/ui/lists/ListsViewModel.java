@@ -21,15 +21,13 @@ public class ListsViewModel extends AndroidViewModel {
 
     private final TodoRepository todoRepository;
     private final HabitRepository habitRepository;
-    private final ReminderRepository reminderRepository;
-    private final UserRepository userRepository;
+        private final UserRepository userRepository;
 
     public ListsViewModel(Application application) {
         super(application);
         todoRepository = TodoRepository.getInstance(application);
         habitRepository = HabitRepository.getInstance();
-        reminderRepository = ReminderRepository.getInstance(application);
-        userRepository = UserRepository.getInstance(application);
+               userRepository = UserRepository.getInstance(application);
     }
 
     public void init() {
