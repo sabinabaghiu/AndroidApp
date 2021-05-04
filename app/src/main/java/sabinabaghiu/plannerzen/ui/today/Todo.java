@@ -3,16 +3,12 @@ package sabinabaghiu.plannerzen.ui.today;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+
 
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
-@Entity(tableName = "todo_table")
 public class Todo {
-    @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
     private String description;
@@ -24,7 +20,6 @@ public class Todo {
     private int year;
     private int icon;
 
-    @Ignore
     public Todo(String title, String description, int time, boolean isImportant, String category, int day, int month, int year) {
         this.title = title;
         this.description = description;

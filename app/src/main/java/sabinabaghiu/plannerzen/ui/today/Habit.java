@@ -1,7 +1,5 @@
 package sabinabaghiu.plannerzen.ui.today;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 public class Habit {
     private String title;
@@ -9,6 +7,8 @@ public class Habit {
     private int iconId;
     private boolean isDone;
     private int count;
+
+    public Habit() {}
 
     public Habit(String title, int goal, int iconId, boolean isDone, int count) {
         this.title = title;

@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import sabinabaghiu.plannerzen.ui.today.Habit;
 
 public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.ViewHolder> {
     private ArrayList<Habit> habits;
+    private Context context;
 
-    HabitListsAdapter(ArrayList<Habit> habits){
+    HabitListsAdapter(Context context, ArrayList<Habit> habits){
         this.habits = habits;
+        this.context = context;
     }
 
     @NonNull
@@ -41,7 +44,7 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
         return habits.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         TextView goal;

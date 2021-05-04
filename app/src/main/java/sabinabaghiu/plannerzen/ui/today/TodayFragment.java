@@ -37,19 +37,19 @@ public class TodayFragment extends Fragment {
         todoTextView = root.findViewById(R.id.textViewNoTodosToday);
         todoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        todayViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-            if (!todos.isEmpty()) {
-                for (Todo t : todos) {
-                    todoRecyclerView.setVisibility(View.VISIBLE);
-                    todoTodayAdapter = new TodoTodayAdapter((ArrayList<Todo>) todos);
-                    todoRecyclerView.setAdapter(todoTodayAdapter);
-                    todoTextView.setVisibility(View.GONE);
-                }
-            } else {
-                todoRecyclerView.setVisibility(View.GONE);
-                todoTextView.setVisibility(View.VISIBLE);
-            }
-        });
+//        todayViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+//            if (!todos.isEmpty()) {
+//                for (Todo t : todos) {
+//                    todoRecyclerView.setVisibility(View.VISIBLE);
+//                    todoTodayAdapter = new TodoTodayAdapter((ArrayList<Todo>) todos);
+//                    todoRecyclerView.setAdapter(todoTodayAdapter);
+//                    todoTextView.setVisibility(View.GONE);
+//                }
+//            } else {
+//                todoRecyclerView.setVisibility(View.GONE);
+//                todoTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         //habit recycler view
         habitRecyclerView = root.findViewById(R.id.recyclerViewHabitsToday);

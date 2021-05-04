@@ -20,8 +20,8 @@ public class TodayViewModel extends AndroidViewModel {
         todoRepository = TodoRepository.getInstance(application);
     }
 
-    public LiveData<List<Todo>> getAllTodos() {
-        return todoRepository.getAllTodos();
-    }
+//    public LiveData<List<Todo>> getAllTodos() {
+//        return todoRepository.getAllTodos();
+//    }
 
 }
