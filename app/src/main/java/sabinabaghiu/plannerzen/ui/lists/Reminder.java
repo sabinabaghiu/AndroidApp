@@ -1,13 +1,11 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "reminder_table")
+
 public class Reminder {
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
     private String title;
     private String date;

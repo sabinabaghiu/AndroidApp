@@ -10,14 +10,12 @@ import java.util.concurrent.Executors;
 
 public class TodoRepository {
     private static TodoRepository instance;
-    private final TodoDAO todoDAO;
-    private final LiveData<List<Todo>> allTodos;
+
+//    private final LiveData<List<Todo>> allTodos;
     private final ExecutorService executorService;
 
     private TodoRepository(Application application) {
-        TodoDatabase database = TodoDatabase.getInstance(application);
-        todoDAO = database.todoDAO();
-        allTodos = todoDAO.getAllTodos();
+
         executorService = Executors.newFixedThreadPool(2);
     }
 
@@ -28,23 +26,4 @@ public class TodoRepository {
         return instance;
     }
 
-    public LiveData<List<Todo>> getAllTodos() {
-        return allTodos;
-    }
-
-    public void insert(Todo todo) {
-        executorService.execute(() -> todoDAO.insert(todo));
-    }
-
-    public void update(Todo todo) {
-        executorService.execute(() -> todoDAO.update(todo));
-    }
-
-    public void delete(Todo todo) {
-        executorService.execute(() -> todoDAO.delete(todo));
-    }
-
-    public void deleteAllTodos() {
-        executorService.execute(todoDAO::deleteAllTodos);
-    }
 }

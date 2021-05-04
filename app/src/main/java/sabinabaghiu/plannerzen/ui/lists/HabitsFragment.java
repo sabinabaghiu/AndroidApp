@@ -15,7 +15,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -27,7 +33,9 @@ public class HabitsFragment extends Fragment {
     private ListsViewModel listsViewModel;
     private RecyclerView habitRecyclerView;
     private TextView habitTextView;
-    HabitListsAdapter habitListsAdapter;
+    private HabitListsAdapter habitListsAdapter;
+    private DatabaseReference reference;
+    private ArrayList<Habit> habits;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,25 +46,61 @@ public class HabitsFragment extends Fragment {
                 new ViewModelProvider(this).get(ListsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_habits, container, false);
 
+        reference = FirebaseDatabase.getInstance().getReference().child("Habits");
 
             //habit recycler view
         habitRecyclerView = root.findViewById(R.id.recyclerViewHabitMyLists);
+        habitRecyclerView.setHasFixedSize(true);
         habitTextView = root.findViewById(R.id.textViewNoHabitsLists);
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        listsViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-//            if (!habits.isEmpty()) {
-//                for (Habit h : habits) {
-//                    habitRecyclerView.setVisibility(View.VISIBLE);
-//                    habitListsAdapter = new HabitListsAdapter((ArrayList<Habit>) habits);
-//                    habitRecyclerView.setAdapter(habitListsAdapter);
-//                    habitTextView.setVisibility(View.GONE);
+        habits = new ArrayList<>();
+        habitListsAdapter = new HabitListsAdapter(getContext(), habits);
+        habitRecyclerView.setAdapter(habitListsAdapter);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Habit habit = dataSnapshot.getValue(Habit.class);
+                    habits.add(habit);
+                }
+                habitListsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+//        if (reference != null){
+//            reference.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    if (snapshot.exists()){
+//                        habits = new ArrayList<>();
+//                        for (DataSnapshot ds : snapshot.getChildren()){
+//                            habits.add(ds.getValue(Habit.class));
+//                        }
+//                        habitListsAdapter = new HabitListsAdapter(habits);
+//                        habitRecyclerView.setAdapter(habitListsAdapter);
+//                        habitRecyclerView.setVisibility(View.VISIBLE);
+//                        habitTextView.setVisibility(View.GONE);
+//                    }
+//                    else {
+//                        habitRecyclerView.setVisibility(View.GONE);
+//                        habitTextView.setVisibility(View.VISIBLE);
+//                    }
 //                }
-//            } else {
-//                habitRecyclerView.setVisibility(View.GONE);
-//                habitTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }
 
              //add button
         CoordinatorLayout coordinatorLayout = root.findViewById(R.id.coordinatorLayoutHabits);
@@ -68,5 +112,5 @@ public class HabitsFragment extends Fragment {
             }
         });
         return root;
-    }
+        }
 }
