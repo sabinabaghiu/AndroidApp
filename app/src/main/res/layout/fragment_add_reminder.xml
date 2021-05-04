@@ -8,13 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="Title" />
+        android:layout_marginTop="20dp"
+        android:hint="Title" />
 
     <Spinner
         android:id="@+id/spinner_reminder_day"
         android:layout_width="250dp"
         android:layout_height="46dp"
         android:entries="@array/days_of_week"
+        android:layout_marginTop="20dp"
         android:prompt="@string/reminder_days_prompt"/>
 
     <EditText
@@ -23,13 +25,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="time"
-        android:text="Time"/>
+        android:layout_marginTop="20dp"
+        android:hint="Time"/>
 
     <Spinner
         android:id="@+id/spinner_reminder_repeat"
         android:layout_width="250dp"
         android:layout_height="46dp"
         android:entries="@array/reminder_repeat"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:prompt="@string/reminder_repeat_prompt"/>
 
     <LinearLayout

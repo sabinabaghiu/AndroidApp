@@ -11,17 +11,13 @@ import java.util.List;
 
 public class TodayViewModel extends AndroidViewModel {
 
-    private final HabitRepository habitRepository;
+//    private final HabitRepository habitRepository;
     private final TodoRepository todoRepository;
 
     public TodayViewModel(Application application) {
         super(application);
-        habitRepository = HabitRepository.getInstance(application);
+//        habitRepository = HabitRepository.getInstance(application);
         todoRepository = TodoRepository.getInstance(application);
-    }
-
-    public LiveData<List<Habit>> getAllHabits() {
-        return habitRepository.getAllHabits();
     }
 
     public LiveData<List<Todo>> getAllTodos() {

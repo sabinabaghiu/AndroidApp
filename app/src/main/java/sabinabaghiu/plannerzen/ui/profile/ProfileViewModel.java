@@ -17,18 +17,16 @@ import sabinabaghiu.plannerzen.ui.today.TodoRepository;
 
 public class ProfileViewModel extends AndroidViewModel {
 
-    private final HabitRepository habitRepository;
+//    private final HabitRepository habitRepository;
     private final UserRepository userRepository;
 
     public ProfileViewModel(Application application) {
         super(application);
-        habitRepository = HabitRepository.getInstance(application);
+//        habitRepository = HabitRepository.getInstance(application);
         userRepository = UserRepository.getInstance(application);
     }
 
-    public LiveData<List<Habit>> getAllHabits() {
-        return habitRepository.getAllHabits();
-    }
+
 
     public void signOut(){
         userRepository.signOut();

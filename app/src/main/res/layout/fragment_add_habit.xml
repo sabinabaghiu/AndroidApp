@@ -8,21 +8,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="Title" />
+        android:hint="Title"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/add_habit_goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="Goal" />
+        android:hint="Goal"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/spinner_habit_icon"
-        android:layout_width="250dp"
+        android:layout_width="162dp"
         android:layout_height="46dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:entries="@array/icon_habit"
-        android:prompt="@string/icon_prompt"/>
+        android:prompt="@string/icon_prompt" />
 
     <LinearLayout
         android:layout_width="match_parent"

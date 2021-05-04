@@ -39,19 +39,19 @@ public class RemindersFragment extends Fragment {
         reminderTextView = root.findViewById(R.id.textViewNoRemindersLists);
         reminderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        listsViewModel.getAllReminders().observe(getViewLifecycleOwner(), reminders -> {
-            if (!reminders.isEmpty()) {
-                for (Reminder r : reminders) {
-                    reminderRecyclerView.setVisibility(View.VISIBLE);
-                    reminderAdapter = new ReminderAdapter((ArrayList<Reminder>) reminders);
-                    reminderRecyclerView.setAdapter(reminderAdapter);
-                    reminderTextView.setVisibility(View.GONE);
-                }
-            } else {
-                reminderRecyclerView.setVisibility(View.GONE);
-                reminderTextView.setVisibility(View.VISIBLE);
-            }
-        });
+//        listsViewModel.getAllReminders().observe(getViewLifecycleOwner(), reminders -> {
+//            if (!reminders.isEmpty()) {
+//                for (Reminder r : reminders) {
+//                    reminderRecyclerView.setVisibility(View.VISIBLE);
+//                    reminderAdapter = new ReminderAdapter((ArrayList<Reminder>) reminders);
+//                    reminderRecyclerView.setAdapter(reminderAdapter);
+//                    reminderTextView.setVisibility(View.GONE);
+//                }
+//            } else {
+//                reminderRecyclerView.setVisibility(View.GONE);
+//                reminderTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
              //add button
         CoordinatorLayout coordinatorLayout = root.findViewById(R.id.coordinatorLayoutReminders);

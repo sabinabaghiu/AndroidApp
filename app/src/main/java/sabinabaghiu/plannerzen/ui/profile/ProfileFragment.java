@@ -44,19 +44,19 @@ public class ProfileFragment extends Fragment {
         profileTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        profileViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-            if (!habits.isEmpty()) {
-                for (Habit h : habits) {
-                    profileRecyclerView.setVisibility(View.VISIBLE);
-                    habitProfileAdapter = new HabitProfileAdapter((ArrayList<Habit>) habits);
-                    profileRecyclerView.setAdapter(habitProfileAdapter);
-                    profileTextView.setVisibility(View.GONE);
-                }
-            } else {
-                profileRecyclerView.setVisibility(View.GONE);
-                profileTextView.setVisibility(View.VISIBLE);
-            }
-        });
+//        profileViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
+//            if (!habits.isEmpty()) {
+//                for (Habit h : habits) {
+//                    profileRecyclerView.setVisibility(View.VISIBLE);
+//                    habitProfileAdapter = new HabitProfileAdapter((ArrayList<Habit>) habits);
+//                    profileRecyclerView.setAdapter(habitProfileAdapter);
+//                    profileTextView.setVisibility(View.GONE);
+//                }
+//            } else {
+//                profileRecyclerView.setVisibility(View.GONE);
+//                profileTextView.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         return root;
     }
