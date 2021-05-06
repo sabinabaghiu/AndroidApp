@@ -12,12 +12,12 @@ Must have requirements
 3. As a user, I want to manage my lists so that they are updated. 
 4. As a user, I want to add habits to help me build them on.
 5. As a user, I want to delete habits that don't fit my needs anymore.
-6. As a user, I want to set the time for a specific task so that I can organize my time.
 
 Should have requirements
 
-7. As a user, I want to receive reminders so that I don't lose my motivation.
-8. As a user, I want to see the prority of my tasks so that I know what I should do first.
+6. As a user, I want to receive reminders so that I don't lose my motivation.
+7. As a user, I want to see the prority of my tasks so that I know what I should do first.
+8. 6. As a user, I want to set the time for a specific task so that I can organize my time.
 
 Could have requirements
 
