@@ -21,9 +21,9 @@ Should have requirements
 
 Could have requirements
 
-6. As a user, I want to have statistics so that I can see my progress.
-9. As a user, I want to have my profile connected with Google Calendar.
+9. As a user, I want to have statistics so that I can see my progress.
+10. As a user, I want to have my profile connected with Google Calendar.
 
 Won't have requirements
 
-10. As a user, I want other people to have access to my schedule.
+11. As a user, I want other people to have access to my schedule.
