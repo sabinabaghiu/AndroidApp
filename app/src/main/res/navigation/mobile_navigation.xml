@@ -41,7 +41,11 @@
         android:id="@+id/navigation_todo_list_add"
         android:name="sabinabaghiu.plannerzen.ui.lists.TodoListAddFragment"
         android:label="Add todo list"
-        tools:layout="@layout/fragment_todo_list_add"/>
+        tools:layout="@layout/fragment_todo_list_add">
+        <action
+            android:id="@+id/action_navigation_todo_list_add_to_navigation_add_task"
+            app:destination="@id/navigation_add_task" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_todo_list_edit"
         android:name="sabinabaghiu.plannerzen.ui.lists.TodoListEditFragment"
@@ -50,10 +54,21 @@
     <fragment
         android:id="@+id/navigation_habits"
         android:name="sabinabaghiu.plannerzen.ui.lists.HabitsFragment"
-        tools:layout="@layout/fragment_habits"/>
+        tools:layout="@layout/fragment_habits">
+        <action
+            android:id="@+id/action_navigation_habits_to_navigation_add_habit"
+            app:destination="@id/navigation_add_habit" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_todo_lists"
         android:name="sabinabaghiu.plannerzen.ui.lists.ListsFragment"
-        tools:layout="@layout/fragment_todos"/>
+        tools:layout="@layout/fragment_todos">
+        <action
+            android:id="@+id/action_navigation_todo_lists_to_navigation_todo_list_add"
+            app:destination="@id/navigation_todo_list_add" />
+        <action
+            android:id="@+id/action_navigation_todo_lists_to_navigation_todo_list_edit"
+            app:destination="@id/navigation_todo_list_edit" />
+    </fragment>
 
 </navigation>

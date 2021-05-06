@@ -1,49 +1,32 @@
 package sabinabaghiu.plannerzen.ui.today;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-
-import java.time.LocalDate;
-import java.util.GregorianCalendar;
 
 public class Todo {
-    private int id;
+    private int taskId;
     private String title;
-    private String description;
     private int time;
     private boolean isImportant;
     private String category;
-    private int day;
-    private int month;
-    private int year;
-    private int icon;
+    private String userId;
 
-    public Todo(String title, String description, int time, boolean isImportant, String category, int day, int month, int year) {
+    public Todo() {
+    }
+
+    public Todo(String userId, int taskId, String title, int time, boolean isImportant, String category) {
+        this.taskId = taskId;
         this.title = title;
-        this.description = description;
         this.time = time;
         this.isImportant = isImportant;
         this.category = category;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.userId = userId;
     }
 
-    public Todo(String title, int time, boolean isImportant)
-    {
-        this.title = title;
-        this.time = time;
-        this.isImportant = isImportant;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
     public String getTitle() {
@@ -52,14 +35,6 @@ public class Todo {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getTime() {
@@ -86,35 +61,11 @@ public class Todo {
         this.category = category;
     }
 
-    public int getDay() {
-        return day;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

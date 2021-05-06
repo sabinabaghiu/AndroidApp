@@ -3,6 +3,8 @@ package sabinabaghiu.plannerzen.ui.today;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,8 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull HabitTodayAdapter.ViewHolder holder, int position) {
         holder.title.setText(habits.get(position).getTitle());
+        holder.icon.setImageResource(habits.get(position).getIconId());
+        holder.checkBox.setChecked(habits.get(position).isDone());
     }
 
     @Override
@@ -40,11 +44,15 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
+        ImageView icon;
+        CheckBox checkBox;
 
 
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.habit_today);
+            icon = itemView.findViewById(R.id.icon_habit_today);
+            checkBox = itemView.findViewById(R.id.checkBox_habit_done);
         }
     }
 }

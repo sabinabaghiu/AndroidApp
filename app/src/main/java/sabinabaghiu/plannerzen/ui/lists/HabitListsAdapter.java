@@ -55,7 +55,7 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
             super(itemView);
             title = itemView.findViewById(R.id.habit_today);
             goal = itemView.findViewById(R.id.habit_goal);
-            icon = itemView.findViewById(R.id.icon_todo_mylist);
+            icon = itemView.findViewById(R.id.icon_habit_mylist);
         }
     }
 }

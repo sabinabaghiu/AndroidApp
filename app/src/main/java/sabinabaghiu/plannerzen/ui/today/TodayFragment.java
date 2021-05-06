@@ -5,16 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
 
 public class TodayFragment extends Fragment {
 
@@ -25,12 +28,15 @@ public class TodayFragment extends Fragment {
     private TextView habitTextView;
     TodoTodayAdapter todoTodayAdapter;
     HabitTodayAdapter habitTodayAdapter;
+    private LoginViewModel loginViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         todayViewModel =
                 new ViewModelProvider(this).get(TodayViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         View root = inflater.inflate(R.layout.fragment_today, container, false);
+
 
         //todo recycler view
         todoRecyclerView = root.findViewById(R.id.recyclerViewTodoToday);

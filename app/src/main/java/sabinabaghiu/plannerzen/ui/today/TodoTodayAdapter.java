@@ -33,7 +33,7 @@ public class TodoTodayAdapter extends RecyclerView.Adapter<TodoTodayAdapter.View
     public void onBindViewHolder(@NonNull TodoTodayAdapter.ViewHolder holder, int position) {
         holder.title.setText(todos.get(position).getTitle() + " - " + todos.get(position).getTime() + " min");
         if (todos.get(position).isImportant())
-            holder.icon.setImageResource(todos.get(position).getIcon());
+            holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
     }
 
     @Override
