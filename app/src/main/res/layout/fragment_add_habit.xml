@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Title"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="15dp"/>
 
     <EditText
         android:id="@+id/add_habit_goal"
@@ -25,7 +25,6 @@
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:entries="@array/icon_habit"
         android:prompt="@string/icon_prompt" />
 
     <LinearLayout

@@ -11,15 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.today.Todo;
 
 public class TodosFragment extends Fragment {
 
@@ -27,7 +25,7 @@ public class TodosFragment extends Fragment {
     private ListsViewModel listsViewModel;
     private RecyclerView listRecyclerView;
     private TextView listTextView;
-    TodoListsAdapter todoListsAdapter;
+    TaskListAdapter taskListAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +58,7 @@ public class TodosFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Ahoy1", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_todo_list_add);
             }
         });
 

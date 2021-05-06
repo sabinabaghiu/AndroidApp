@@ -30,6 +30,7 @@ public class ListsViewModel extends AndroidViewModel {
                userRepository = UserRepository.getInstance(application);
     }
 
+
     public void init() {
         String userId = userRepository.getCurrentUser().getValue().getUid();
         habitRepository.init(userId);
@@ -43,7 +44,7 @@ public class ListsViewModel extends AndroidViewModel {
         return habitRepository.getHabit();
     }
 
-    public void saveHabit(String title, int goal, int iconId, boolean isDone, int count){
-        habitRepository.saveHabit(title, goal, iconId, isDone, count);
+    public void saveHabit(String userId, String title, int goal, int iconId, boolean isDone, int count){
+        habitRepository.saveHabit(userId, title, goal, iconId, isDone, count);
     }
 }

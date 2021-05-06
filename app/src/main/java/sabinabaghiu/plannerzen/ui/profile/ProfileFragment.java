@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 import sabinabaghiu.plannerzen.ui.today.Todo;
 import sabinabaghiu.plannerzen.ui.today.TodoTodayAdapter;
@@ -32,14 +34,18 @@ public class ProfileFragment extends Fragment {
     private RecyclerView profileRecyclerView;
     private TextView profileTextView;
     HabitProfileAdapter habitProfileAdapter;
+    private LoginViewModel loginViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         setHasOptionsMenu(true);
 
-            //habit recycler view
+        checkIfSignedIn();
+
+        //habit recycler view
         profileRecyclerView = root.findViewById(R.id.recyclerViewProfile);
         profileTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,7 +77,6 @@ public class ProfileFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.logout){
             signOut(getView());
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_sign_in);
             return true;
         } else return false;
     }
@@ -79,4 +84,16 @@ public class ProfileFragment extends Fragment {
     public void signOut(View view){
         profileViewModel.signOut();
     }
+
+    private void checkIfSignedIn() {
+        loginViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
+            if (user == null)
+                goToLogIn();
+        });
+    }
+
+    private void goToLogIn() {
+        Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_sign_in);
+    }
+
 }
