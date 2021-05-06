@@ -17,7 +17,7 @@ Should have requirements
 
 6. As a user, I want to receive reminders so that I don't lose my motivation.
 7. As a user, I want to see the prority of my tasks so that I know what I should do first.
-8. 6. As a user, I want to set the time for a specific task so that I can organize my time.
+8. As a user, I want to set the time for a specific task so that I can organize my time.
 
 Could have requirements
 
