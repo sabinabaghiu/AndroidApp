@@ -8,10 +8,10 @@ and help improve this aspect.
 Must have requirements 
 
 1. As a user, I want to log in so that I can see my profile.
-2. As a user, I want to create lists so that I can see my tasks.
-3. As a user, I want to manage my lists so that they are updated. 
+2. As a user, I want to create tasks so that I can see what I need to do.
+3. As a user, I want to manage my tasks so that they are updated. 
 4. As a user, I want to add habits to help me build them on.
-5. As a user, I want to delete habits that don't fit my needs anymore.
+5. As a user, I want to manage habits that don't fit my needs anymore.
 
 Should have requirements
 
@@ -22,8 +22,8 @@ Should have requirements
 Could have requirements
 
 9. As a user, I want to have statistics so that I can see my progress.
-10. As a user, I want to have my profile connected with Google Calendar.
 
 Won't have requirements
 
+10. As a user, I want to have my profile connected with Google Calendar.
 11. As a user, I want other people to have access to my schedule.
