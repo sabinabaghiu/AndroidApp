@@ -13,7 +13,7 @@
         android:id="@+id/textViewTodoTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="To do's"
+        android:text="Tasks for today"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold" />

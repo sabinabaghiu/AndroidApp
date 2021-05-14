@@ -25,7 +25,7 @@ public class HabitProfileAdapter extends RecyclerView.Adapter<HabitProfileAdapte
     @Override
     public HabitProfileAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.habit_list_item_myprofile, parent, false);
+        View view = inflater.inflate(R.layout.habit_list_item, parent, false);
         return new HabitProfileAdapter.ViewHolder(view);
     }
 
@@ -48,8 +48,8 @@ public class HabitProfileAdapter extends RecyclerView.Adapter<HabitProfileAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.habit_today);
-            icon = itemView.findViewById(R.id.icon_habit_my_profile);
+            title = itemView.findViewById(R.id.habit_title);
+            icon = itemView.findViewById(R.id.icon_habit);
         }
     }
 }

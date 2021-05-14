@@ -12,6 +12,14 @@
         android:hint="Title" />
 
     <EditText
+        android:id="@+id/task_add_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Date"
+        android:layout_marginTop="10dp" />
+
+    <EditText
         android:id="@+id/task_add_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,14 +35,6 @@
         android:layout_marginTop="20dp"
         android:textSize="17dp"/>
 
-    <Spinner
-        android:id="@+id/spinner_task_category"
-        android:layout_width="250dp"
-        android:layout_height="46dp"
-        android:entries="@array/todo_list_category"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:prompt="@string/category_prompt"/>
 
     <LinearLayout
         android:layout_width="match_parent"

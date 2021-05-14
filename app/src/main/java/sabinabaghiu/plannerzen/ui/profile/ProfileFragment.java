@@ -1,6 +1,5 @@
 package sabinabaghiu.plannerzen.ui.profile;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,10 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -20,13 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import java.util.ArrayList;
-
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
-import sabinabaghiu.plannerzen.ui.today.Habit;
-import sabinabaghiu.plannerzen.ui.today.Todo;
-import sabinabaghiu.plannerzen.ui.today.TodoTodayAdapter;
 
 public class ProfileFragment extends Fragment {
 

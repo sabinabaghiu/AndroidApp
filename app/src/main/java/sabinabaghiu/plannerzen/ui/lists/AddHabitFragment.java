@@ -62,8 +62,8 @@ public class AddHabitFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SpinnerRow gaidys = (SpinnerRow) parent.getItemAtPosition(position);
-                iconId = gaidys.getIconId();
+                SpinnerRow row = (SpinnerRow) parent.getItemAtPosition(position);
+                iconId = row.getIconId();
             }
 
             @Override
@@ -84,12 +84,15 @@ public class AddHabitFragment extends Fragment {
             habit = new Habit(currentUser, title, goal, iconId, false, 0);
             reference.push().setValue(habit);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_habits);
+
+            if (navigationView != null)
+                navigationView.setVisibility(View.VISIBLE);
         });
 
         cancelButton.setOnClickListener(v -> {
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_add_habit);
             if (navigationView != null)
-                navigationView.setVisibility(View.GONE);
+                navigationView.setVisibility(View.VISIBLE);
         });
 
         return root;

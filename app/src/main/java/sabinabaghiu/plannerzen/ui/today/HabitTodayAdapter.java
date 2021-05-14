@@ -50,7 +50,7 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.habit_today);
+            title = itemView.findViewById(R.id.habit_today_title);
             icon = itemView.findViewById(R.id.icon_habit_today);
             checkBox = itemView.findViewById(R.id.checkBox_habit_done);
         }

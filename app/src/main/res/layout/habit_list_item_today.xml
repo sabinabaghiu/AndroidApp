@@ -20,7 +20,7 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/habit_today"
+            android:id="@+id/habit_today_title"
             android:layout_width="243dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

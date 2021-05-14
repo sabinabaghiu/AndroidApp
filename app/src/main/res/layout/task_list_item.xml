@@ -21,7 +21,7 @@
     </TableLayout>
 
     <ImageView
-        android:id="@+id/icon_task_add"
+        android:id="@+id/icon_task"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_gravity="center"

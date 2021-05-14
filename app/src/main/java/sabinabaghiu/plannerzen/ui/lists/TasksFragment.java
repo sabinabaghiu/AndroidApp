@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -18,20 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
-public class TodosFragment extends Fragment {
+public class TasksFragment extends Fragment {
 
 
     private ListsViewModel listsViewModel;
     private RecyclerView listRecyclerView;
     private TextView listTextView;
-    TaskListAdapter taskListAdapter;
+    TaskAdapter taskAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         listsViewModel =
                 new ViewModelProvider(this).get(ListsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_todos, container, false);
+        View root = inflater.inflate(R.layout.fragment_tasks, container, false);
 
                 //todo recycler view
         listRecyclerView = root.findViewById(R.id.recyclerViewTodoMyLists);
@@ -58,7 +58,7 @@ public class TodosFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_todo_list_add);
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_add_task);
             }
         });
 

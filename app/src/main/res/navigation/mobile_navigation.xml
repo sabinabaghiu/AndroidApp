@@ -37,20 +37,12 @@
         android:name="sabinabaghiu.plannerzen.ui.lists.AddTaskFragment"
         android:label="Add task"
         tools:layout="@layout/fragment_add_task"/>
+
     <fragment
-        android:id="@+id/navigation_todo_list_add"
-        android:name="sabinabaghiu.plannerzen.ui.lists.TodoListAddFragment"
-        android:label="Add todo list"
-        tools:layout="@layout/fragment_todo_list_add">
-        <action
-            android:id="@+id/action_navigation_todo_list_add_to_navigation_add_task"
-            app:destination="@id/navigation_add_task" />
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_todo_list_edit"
-        android:name="sabinabaghiu.plannerzen.ui.lists.TodoListEditFragment"
+        android:id="@+id/navigation_edit_task"
+        android:name="sabinabaghiu.plannerzen.ui.lists.EditTaskFragment"
         android:label="Edit todo list"
-        tools:layout="@layout/fragment_todo_list_edit"/>
+        tools:layout="@layout/fragment_edit_task"/>
     <fragment
         android:id="@+id/navigation_habits"
         android:name="sabinabaghiu.plannerzen.ui.lists.HabitsFragment"
@@ -60,15 +52,15 @@
             app:destination="@id/navigation_add_habit" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_todo_lists"
+        android:id="@+id/navigation_tasks"
         android:name="sabinabaghiu.plannerzen.ui.lists.ListsFragment"
-        tools:layout="@layout/fragment_todos">
+        tools:layout="@layout/fragment_tasks">
         <action
-            android:id="@+id/action_navigation_todo_lists_to_navigation_todo_list_add"
-            app:destination="@id/navigation_todo_list_add" />
+            android:id="@+id/action_navigation_tasks_to_navigation_edit_task"
+            app:destination="@id/navigation_edit_task" />
         <action
-            android:id="@+id/action_navigation_todo_lists_to_navigation_todo_list_edit"
-            app:destination="@id/navigation_todo_list_edit" />
+            android:id="@+id/action_navigation_tasks_to_navigation_add_task"
+            app:destination="@id/navigation_add_task" />
     </fragment>
 
 </navigation>
