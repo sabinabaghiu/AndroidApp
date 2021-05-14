@@ -5,13 +5,4 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="category_prompt">Choose a category</string>
-    <string name="icon_prompt">Choose an icon</string>
-
-    <string-array name="todo_list_category">
-        <item>Job</item>
-        <item>University</item>
-        <item>Vacation</item>
-        <item>Free day</item>
-    </string-array>
 </resources>

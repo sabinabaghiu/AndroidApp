@@ -13,32 +13,32 @@ import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
 
-public class TodoTodayAdapter extends RecyclerView.Adapter<TodoTodayAdapter.ViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
-    private ArrayList<Todo> todos;
+    private ArrayList<Task> tasks;
 
-    TodoTodayAdapter(ArrayList<Todo> todos){
-        this.todos = todos;
+    TaskAdapter(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
     @NonNull
     @Override
-    public TodoTodayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.todo_list_item_today, parent, false);
+        View view = inflater.inflate(R.layout.task_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoTodayAdapter.ViewHolder holder, int position) {
-        holder.title.setText(todos.get(position).getTitle() + " - " + todos.get(position).getTime() + " min");
-        if (todos.get(position).isImportant())
+    public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
+        holder.title.setText(tasks.get(position).getTitle() + " - " + tasks.get(position).getTime() + " min");
+        if (tasks.get(position).isImportant())
             holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
     }
 
     @Override
     public int getItemCount() {
-        return todos.size();
+        return tasks.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,8 +49,8 @@ public class TodoTodayAdapter extends RecyclerView.Adapter<TodoTodayAdapter.View
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.todo_today);
-            icon = itemView.findViewById(R.id.icon_today);
+            title = itemView.findViewById(R.id.task_add);
+            icon = itemView.findViewById(R.id.icon_task);
         }
     }
 }

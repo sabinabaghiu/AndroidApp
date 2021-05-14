@@ -4,28 +4,23 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.List;
 
 import sabinabaghiu.plannerzen.ui.login.UserRepository;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 import sabinabaghiu.plannerzen.ui.today.HabitRepository;
-import sabinabaghiu.plannerzen.ui.today.Todo;
-import sabinabaghiu.plannerzen.ui.today.TodoRepository;
+import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 
 public class ListsViewModel extends AndroidViewModel {
 
-    private final TodoRepository todoRepository;
+    private final TaskRepository taskRepository;
     private final HabitRepository habitRepository;
         private final UserRepository userRepository;
 
     public ListsViewModel(Application application) {
         super(application);
-        todoRepository = TodoRepository.getInstance(application);
+        taskRepository = TaskRepository.getInstance();
         habitRepository = HabitRepository.getInstance();
                userRepository = UserRepository.getInstance(application);
     }

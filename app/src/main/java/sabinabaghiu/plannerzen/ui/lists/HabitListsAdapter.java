@@ -28,14 +28,13 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
     @Override
     public HabitListsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.habit_list_item_mylists, parent, false);
+        View view = inflater.inflate(R.layout.habit_list_item, parent, false);
         return new HabitListsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HabitListsAdapter.ViewHolder holder, int position) {
-        holder.title.setText(habits.get(position).getTitle());
-        holder.goal.setText("Goal: " + habits.get(position).getGoal());
+        holder.title.setText(habits.get(position).getTitle() + "    Goal: " + habits.get(position).getGoal());
         holder.icon.setImageResource(habits.get(position).getIconId());
     }
 
@@ -53,9 +52,8 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.habit_today);
-            goal = itemView.findViewById(R.id.habit_goal);
-            icon = itemView.findViewById(R.id.icon_habit_mylist);
+            title = itemView.findViewById(R.id.habit_title);
+            icon = itemView.findViewById(R.id.icon_habit);
         }
     }
 }

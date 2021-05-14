@@ -1,32 +1,40 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 
-public class Todo {
-    private int taskId;
+public class Task {
     private String title;
+    private String date;
     private int time;
     private boolean isImportant;
-    private String category;
     private String userId;
+    private boolean isDone;
 
-    public Todo() {
+    public Task() {
     }
 
-    public Todo(String userId, int taskId, String title, int time, boolean isImportant, String category) {
-        this.taskId = taskId;
+    public Task(String userId, String title, int time, boolean isImportant, String date, boolean isDone) {
         this.title = title;
         this.time = time;
         this.isImportant = isImportant;
-        this.category = category;
         this.userId = userId;
+        this.date = date;
+        this.isDone = false;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public boolean isDone() {
+        return isDone;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getTitle() {
@@ -53,13 +61,6 @@ public class Todo {
         isImportant = important;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public String getUserId() {
         return userId;

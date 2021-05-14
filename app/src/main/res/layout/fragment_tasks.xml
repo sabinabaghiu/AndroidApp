@@ -12,7 +12,7 @@
         android:id="@+id/coordinatorLayoutTodos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.lists.TodosFragment">
+        tools:context=".ui.lists.TasksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:id="@+id/textViewNoTodoLists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="There are no lists to show"
+        android:text="There are no tasks to show"
         android:textColor="@color/black"
         android:textSize="17dp" />
 
