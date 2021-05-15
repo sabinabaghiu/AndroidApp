@@ -24,7 +24,7 @@ public class HabitRepository {
         return instance;
     }
 
-    public void init(String userId) {
+    public void init() {
         myRef = FirebaseDatabase.getInstance().getReference().child("Habits");
         habit = new HabitLiveData(myRef);
     }

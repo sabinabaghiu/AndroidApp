@@ -82,6 +82,7 @@ public class AddHabitFragment extends Fragment {
 
             String currentUser = listsViewModel.getCurrentUser().getValue().getUid();
             habit = new Habit(currentUser, title, goal, iconId, false, 0);
+//            listsViewModel.saveHabit(currentUser, title, goal, iconId, false, 0);
             reference.push().setValue(habit);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_habits);
 
@@ -90,7 +91,7 @@ public class AddHabitFragment extends Fragment {
         });
 
         cancelButton.setOnClickListener(v -> {
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_add_habit);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_habits);
             if (navigationView != null)
                 navigationView.setVisibility(View.VISIBLE);
         });

@@ -98,7 +98,7 @@ public class AddTaskFragment extends Fragment {
         cancelButton.setOnClickListener(v -> {
             if (navigationView != null)
                 navigationView.setVisibility(View.VISIBLE);
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_add_task);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_tasks);
         });
 
         return root;

@@ -45,6 +45,7 @@ public class HabitsFragment extends Fragment {
         listsViewModel =
                 new ViewModelProvider(this).get(ListsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_habits, container, false);
+//        listsViewModel.init();
 
         reference = FirebaseDatabase.getInstance().getReference().child("Habits");
 

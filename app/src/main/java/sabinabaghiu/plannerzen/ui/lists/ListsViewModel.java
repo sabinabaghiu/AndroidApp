@@ -27,8 +27,8 @@ public class ListsViewModel extends AndroidViewModel {
 
 
     public void init() {
-        String userId = userRepository.getCurrentUser().getValue().getUid();
-        habitRepository.init(userId);
+//        String userId = userRepository.getCurrentUser().getValue().getUid();
+        habitRepository.init();
     }
 
     public LiveData<FirebaseUser> getCurrentUser(){
