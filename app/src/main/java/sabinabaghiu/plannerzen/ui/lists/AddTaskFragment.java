@@ -6,7 +6,6 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -36,8 +35,6 @@ public class AddTaskFragment extends Fragment {
     private Switch isImportant;
     private DatePickerDialog datePicker;
     private String currentDate;
-    private DatabaseReference reference;
-    private Task task;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +44,7 @@ public class AddTaskFragment extends Fragment {
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setVisibility(View.INVISIBLE);
+        listsViewModel.initTask();
         titleEditText = root.findViewById(R.id.task_add_title);
         dateEditText = root.findViewById(R.id.task_add_date);
         timeEditText = root.findViewById(R.id.task_add_time);
@@ -78,16 +76,14 @@ public class AddTaskFragment extends Fragment {
             }
         });
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/");
-        reference = database.getReference().child("Tasks");
+
 
         saveButton.setOnClickListener(v ->{
             String currentUser = listsViewModel.getCurrentUser().getValue().getUid();
             String title = titleEditText.getText().toString().trim();
             int time = Integer.parseInt(timeEditText.getText().toString().trim());
             boolean isImp = isImportant.isChecked();
-            task = new Task(currentUser, title, time, isImp, currentDate, false);
-            reference.push().setValue(task);
+            listsViewModel.saveTask(currentUser, title, time, isImp, currentDate, false);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_tasks);
 
             if (navigationView != null)

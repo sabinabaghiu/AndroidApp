@@ -25,15 +25,11 @@ public class HabitRepository {
     }
 
     public void init() {
-        myRef = FirebaseDatabase.getInstance().getReference().child("Habits");
+        myRef = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Habits");
         habit = new HabitLiveData(myRef);
     }
 
     public void saveHabit(String userId, String title, int goal, int iconId, boolean isDone, int count) {
-        myRef.setValue(new Habit(userId, title, goal, iconId, isDone, count));
-    }
-
-    public HabitLiveData getHabit(){
-        return habit;
+        myRef.push().setValue(new Habit(userId, title, goal, iconId, isDone, count));
     }
 }

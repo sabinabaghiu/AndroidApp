@@ -18,16 +18,12 @@ public class TaskRepository {
         return instance;
     }
 
-    public void init(String userId) {
-        myRef = FirebaseDatabase.getInstance().getReference().child("Tasks");
+    public void init() {
+        myRef = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Tasks");
         taskList = new TaskLiveData(myRef);
     }
 
     public void saveTask(String userId, String title, int time, boolean isImportant, String date, boolean isDone){
-        myRef.setValue(new Task(userId, title, time, isImportant, date, isDone));
-    }
-
-    public TaskLiveData getTask() {
-        return taskList;
+        myRef.push().setValue(new Task(userId, title, time, isImportant, date, isDone));
     }
 }
