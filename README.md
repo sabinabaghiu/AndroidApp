@@ -11,7 +11,7 @@ Must have requirements
 2. As a user, I want to create tasks so that I can see what I need to do.
 3. As a user, I want to manage my tasks so that they are updated. 
 4. As a user, I want to add habits to help me build them on.
-5. As a user, I want to manage habits that don't fit my needs anymore.
+5. As a user, I want to delete habits that don't fit my needs anymore.
 
 Should have requirements
 
