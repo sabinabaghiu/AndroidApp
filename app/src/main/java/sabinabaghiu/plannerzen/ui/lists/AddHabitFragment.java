@@ -1,38 +1,26 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.today.Habit;
+
 
 public class AddHabitFragment extends Fragment {
     private ListsViewModel listsViewModel;
@@ -41,8 +29,6 @@ public class AddHabitFragment extends Fragment {
     private EditText goalEditText;
     private Button saveButton;
     private Button cancelButton;
-    private DatabaseReference reference;
-    private Habit habit;
     private int iconId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -53,7 +39,7 @@ public class AddHabitFragment extends Fragment {
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setVisibility(View.INVISIBLE);
-        listsViewModel.init();
+        listsViewModel.initHabit();
         titleEditText = root.findViewById(R.id.add_habit_title);
         goalEditText = root.findViewById(R.id.add_habit_goal);
          spinner = root.findViewById(R.id.spinner_habit_icon);
@@ -73,17 +59,15 @@ public class AddHabitFragment extends Fragment {
         saveButton = root.findViewById(R.id.button_save_habit);
         cancelButton = root.findViewById(R.id.button_cancel_habit);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/");
-        reference = database.getReference().child("Habits");
+
 
         saveButton.setOnClickListener(v -> {
             String title = titleEditText.getText().toString().trim();
             int goal = Integer.parseInt(goalEditText.getText().toString().trim());
 
             String currentUser = listsViewModel.getCurrentUser().getValue().getUid();
-            habit = new Habit(currentUser, title, goal, iconId, false, 0);
-//            listsViewModel.saveHabit(currentUser, title, goal, iconId, false, 0);
-            reference.push().setValue(habit);
+            listsViewModel.saveHabit(currentUser, title, goal, iconId, false, 0);
+
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_habits);
 
             if (navigationView != null)

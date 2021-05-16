@@ -22,24 +22,29 @@ public class ListsViewModel extends AndroidViewModel {
         super(application);
         taskRepository = TaskRepository.getInstance();
         habitRepository = HabitRepository.getInstance();
-               userRepository = UserRepository.getInstance(application);
+        userRepository = UserRepository.getInstance(application);
     }
 
 
-    public void init() {
+
+    public void initHabit() {
 //        String userId = userRepository.getCurrentUser().getValue().getUid();
         habitRepository.init();
+    }
+    public void initTask(){
+        taskRepository.init();
     }
 
     public LiveData<FirebaseUser> getCurrentUser(){
         return userRepository.getCurrentUser();
     }
 
-    public LiveData<Habit> getHabit(){
-        return habitRepository.getHabit();
-    }
 
     public void saveHabit(String userId, String title, int goal, int iconId, boolean isDone, int count){
         habitRepository.saveHabit(userId, title, goal, iconId, isDone, count);
+    }
+
+    public void saveTask(String userId, String title, int time, boolean isImportant, String date, boolean isDone){
+        taskRepository.saveTask(userId, title, time, isImportant, date, isDone);
     }
 }

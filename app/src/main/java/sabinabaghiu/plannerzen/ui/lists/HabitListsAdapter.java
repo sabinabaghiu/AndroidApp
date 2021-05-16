@@ -10,16 +10,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 
+//public class HabitListsAdapter extends FirebaseRecyclerAdapter<Habit, HabitListsAdapter.ViewHolder> {
+//    public HabitListsAdapter(@NonNull FirebaseRecyclerOptions<Habit> options){
+//        super(options);
+//    }
+
+
+
 public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.ViewHolder> {
-    private ArrayList<Habit> habits;
+    private List<Habit> habits;
     private Context context;
 
-    HabitListsAdapter(Context context, ArrayList<Habit> habits){
+    HabitListsAdapter(Context context, List<Habit> habits){
         this.habits = habits;
         this.context = context;
     }
@@ -31,7 +42,12 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
         View view = inflater.inflate(R.layout.habit_list_item, parent, false);
         return new HabitListsAdapter.ViewHolder(view);
     }
-
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull HabitListsAdapter.ViewHolder holder, int position, Habit habit) {
+//        holder.title.setText(habit.getTitle() + "    Goal: " + habit.getGoal());
+//        holder.icon.setImageResource(habit.getIconId());
+//    }
     @Override
     public void onBindViewHolder(@NonNull HabitListsAdapter.ViewHolder holder, int position) {
         holder.title.setText(habits.get(position).getTitle() + "    Goal: " + habits.get(position).getGoal());
@@ -46,7 +62,6 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
-        TextView goal;
         ImageView icon;
 
 

@@ -38,19 +38,7 @@ public class TasksFragment extends Fragment {
         listTextView = root.findViewById(R.id.textViewNoTodoLists);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        listsViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-//            if (!todos.isEmpty()) {
-//                for (Todo t : todos) {
-//                    listRecyclerView.setVisibility(View.VISIBLE);
-//                    todoListsAdapter = new TodoListsAdapter((ArrayList<Todo>) todos);
-//                    listRecyclerView.setAdapter(todoListsAdapter);
-//                    listTextView.setVisibility(View.GONE);
-//                }
-//            } else {
-//                listRecyclerView.setVisibility(View.GONE);
-//                listTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
+
 
             //add button
         CoordinatorLayout coordinatorLayout = root.findViewById(R.id.coordinatorLayoutTodos);
