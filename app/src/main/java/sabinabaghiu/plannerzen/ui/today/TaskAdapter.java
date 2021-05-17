@@ -27,6 +27,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public Context getContext(){
+        return context;
+    }
+
+    public void deleteItem(int position){
+        Task task = tasks.get(position);
+        TaskRepository.getInstance().deleteTask(task.getId());
+
+    }
+
     @NonNull
     @Override
     public TaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

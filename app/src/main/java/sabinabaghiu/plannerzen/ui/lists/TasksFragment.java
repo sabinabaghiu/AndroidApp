@@ -11,12 +11,14 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.SwipeItemTouchHelperTasks;
 import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
 public class TasksFragment extends Fragment {
@@ -53,6 +55,10 @@ public class TasksFragment extends Fragment {
                 taskAdapter.UpdateList(tasks);
             }
         });
+
+            //swiping for edit and delete
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouchHelperTasks(taskAdapter));
+        itemTouchHelper.attachToRecyclerView(taskRecyclerView);
 
             //add button
         CoordinatorLayout coordinatorLayout = root.findViewById(R.id.coordinatorLayoutTodos);
