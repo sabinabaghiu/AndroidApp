@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:hint="Time" />
 
     <Switch
@@ -32,7 +32,7 @@
         android:layout_width="250dp"
         android:layout_height="44dp"
         android:text="Is important"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:textSize="17dp"/>
 
 
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="30dp">
 
         <Button
             android:id="@+id/button_save_task"

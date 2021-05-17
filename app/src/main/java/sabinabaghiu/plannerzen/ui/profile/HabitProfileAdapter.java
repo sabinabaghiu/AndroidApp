@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.profile;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +16,31 @@ import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 
 public class HabitProfileAdapter extends RecyclerView.Adapter<HabitProfileAdapter.ViewHolder> {
-    private ArrayList<Habit> habits;
+    private ArrayList<Habit> habits = new ArrayList<>();
+    private Context context;
 
-    HabitProfileAdapter(ArrayList<Habit> habits) {
+    HabitProfileAdapter(Context context) {
+        this.context = context;
+    }
+
+    public void updateList(ArrayList<Habit> habits){
         this.habits = habits;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public HabitProfileAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.habit_list_item, parent, false);
+        View view = inflater.inflate(R.layout.habit_list_item_profile, parent, false);
         return new HabitProfileAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HabitProfileAdapter.ViewHolder holder, int position) {
-        holder.title.setText(habits.get(position).getTitle() + "    " + habits.get(position).getCount() + " days");
+        holder.title.setText(habits.get(position).getTitle());
         holder.icon.setImageResource(habits.get(position).getIconId());
+        holder.extra.setText("Streak: " +  habits.get(position).getCount() + " days");
     }
 
     @Override
@@ -44,12 +52,14 @@ public class HabitProfileAdapter extends RecyclerView.Adapter<HabitProfileAdapte
 
         TextView title;
         ImageView icon;
+        TextView extra;
 
 
         ViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.habit_title);
-            icon = itemView.findViewById(R.id.icon_habit);
+            title = itemView.findViewById(R.id.habit_title_profile);
+            icon = itemView.findViewById(R.id.icon_habit_profile);
+            extra = itemView.findViewById(R.id.habit_streak);
         }
     }
 }

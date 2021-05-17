@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.today;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,16 @@ import java.util.ArrayList;
 import sabinabaghiu.plannerzen.R;
 
 public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.ViewHolder> {
-    private ArrayList<Habit> habits;
+    private ArrayList<Habit> habits = new ArrayList<>();
+    private Context context;
 
-    HabitTodayAdapter(ArrayList<Habit> habits){
+    HabitTodayAdapter(Context context){
+        this.context = context;
+    }
+
+    public void updateList(ArrayList<Habit> habits){
         this.habits = habits;
+        notifyDataSetChanged();
     }
 
     @NonNull

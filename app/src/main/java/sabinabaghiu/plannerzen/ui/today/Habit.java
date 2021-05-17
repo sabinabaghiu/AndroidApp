@@ -7,25 +7,24 @@ public class Habit {
     private int iconId;
     private boolean isDone;
     private int count;
-    private String userId;
+    private String id;
 
     public Habit() {}
 
-    public Habit(String userId, String title, int goal, int iconId, boolean isDone, int count) {
+    public Habit(String title, int goal, int iconId, boolean isDone, int count) {
         this.title = title;
         this.goal = goal;
         this.iconId = iconId;
         this.isDone = false;
         this.count = 0;
-        this.userId = userId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

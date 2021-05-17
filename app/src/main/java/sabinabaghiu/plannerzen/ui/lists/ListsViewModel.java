@@ -7,9 +7,12 @@ import androidx.lifecycle.LiveData;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 import sabinabaghiu.plannerzen.ui.login.UserRepository;
 import sabinabaghiu.plannerzen.ui.today.Habit;
 import sabinabaghiu.plannerzen.ui.today.HabitRepository;
+import sabinabaghiu.plannerzen.ui.today.Task;
 import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 
 public class ListsViewModel extends AndroidViewModel {
@@ -26,13 +29,11 @@ public class ListsViewModel extends AndroidViewModel {
     }
 
 
-
     public void initHabit() {
-//        String userId = userRepository.getCurrentUser().getValue().getUid();
-        habitRepository.init();
+        habitRepository.init(getCurrentUser().getValue().getUid());
     }
     public void initTask(){
-        taskRepository.init();
+        taskRepository.init(getCurrentUser().getValue().getUid());
     }
 
     public LiveData<FirebaseUser> getCurrentUser(){
@@ -40,11 +41,19 @@ public class ListsViewModel extends AndroidViewModel {
     }
 
 
-    public void saveHabit(String userId, String title, int goal, int iconId, boolean isDone, int count){
-        habitRepository.saveHabit(userId, title, goal, iconId, isDone, count);
+    public void saveHabit(String title, int goal, int iconId, boolean isDone, int count){
+        habitRepository.saveHabit(title, goal, iconId, isDone, count);
     }
 
-    public void saveTask(String userId, String title, int time, boolean isImportant, String date, boolean isDone){
-        taskRepository.saveTask(userId, title, time, isImportant, date, isDone);
+    public void saveTask(String title, int time, boolean isImportant, String date, boolean isDone){
+        taskRepository.saveTask(title, time, isImportant, date, isDone);
+    }
+
+    public LiveData<ArrayList<Habit>> getHabits(){
+        return habitRepository.getHabits();
+    }
+
+    public LiveData<ArrayList<Task>> getTasks() {
+        return taskRepository.getTasks();
     }
 }

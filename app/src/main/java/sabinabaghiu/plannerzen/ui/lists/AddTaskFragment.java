@@ -16,17 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.today.Task;
 
 public class AddTaskFragment extends Fragment {
     private ListsViewModel listsViewModel;
@@ -77,14 +72,12 @@ public class AddTaskFragment extends Fragment {
         });
 
 
-
         saveButton.setOnClickListener(v ->{
-            String currentUser = listsViewModel.getCurrentUser().getValue().getUid();
             String title = titleEditText.getText().toString().trim();
             int time = Integer.parseInt(timeEditText.getText().toString().trim());
             boolean isImp = isImportant.isChecked();
-            listsViewModel.saveTask(currentUser, title, time, isImp, currentDate, false);
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_tasks);
+            listsViewModel.saveTask(title, time, isImp, currentDate, false);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
 
             if (navigationView != null)
                 navigationView.setVisibility(View.VISIBLE);
@@ -94,8 +87,10 @@ public class AddTaskFragment extends Fragment {
         cancelButton.setOnClickListener(v -> {
             if (navigationView != null)
                 navigationView.setVisibility(View.VISIBLE);
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.navigation_tasks);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });
+
+
 
         return root;
     }

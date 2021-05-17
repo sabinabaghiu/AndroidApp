@@ -10,29 +10,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.today.Habit;
-
-//public class HabitListsAdapter extends FirebaseRecyclerAdapter<Habit, HabitListsAdapter.ViewHolder> {
-//    public HabitListsAdapter(@NonNull FirebaseRecyclerOptions<Habit> options){
-//        super(options);
-//    }
-
-
+import sabinabaghiu.plannerzen.ui.today.HabitRepository;
 
 public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.ViewHolder> {
-    private List<Habit> habits;
+    private ArrayList<Habit> habits = new ArrayList<>();
     private Context context;
 
-    HabitListsAdapter(Context context, List<Habit> habits){
-        this.habits = habits;
+    HabitListsAdapter(Context context){
         this.context = context;
+    }
+
+    public void updateList(ArrayList<Habit> habits){
+        this.habits = habits;
+        notifyDataSetChanged();
+    }
+
+    public Context getContext(){
+        return context;
+    }
+
+    public void deleteItem(int position){
+        Habit habit = habits.get(position);
+        HabitRepository.getInstance().deleteHabit(habit.getId());
+
     }
 
     @NonNull
@@ -42,16 +46,12 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
         View view = inflater.inflate(R.layout.habit_list_item, parent, false);
         return new HabitListsAdapter.ViewHolder(view);
     }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull HabitListsAdapter.ViewHolder holder, int position, Habit habit) {
-//        holder.title.setText(habit.getTitle() + "    Goal: " + habit.getGoal());
-//        holder.icon.setImageResource(habit.getIconId());
-//    }
+
     @Override
     public void onBindViewHolder(@NonNull HabitListsAdapter.ViewHolder holder, int position) {
-        holder.title.setText(habits.get(position).getTitle() + "    Goal: " + habits.get(position).getGoal());
+        holder.title.setText(habits.get(position).getTitle());
         holder.icon.setImageResource(habits.get(position).getIconId());
+        holder.extra.setText("Goal: " + habits.get(position).getGoal() + " days");
     }
 
     @Override
@@ -63,12 +63,14 @@ public class HabitListsAdapter extends RecyclerView.Adapter<HabitListsAdapter.Vi
 
         TextView title;
         ImageView icon;
+        TextView extra;
 
 
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.habit_title);
             icon = itemView.findViewById(R.id.icon_habit);
+            extra = itemView.findViewById(R.id.habit_goal);
         }
     }
 }
