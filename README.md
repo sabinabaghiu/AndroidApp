@@ -15,7 +15,7 @@ Must have requirements
 
 Should have requirements
 
-- [x] As a user, I want to receive reminders so that I don't lose my motivation.
+- [ ] As a user, I want to receive reminders so that I don't lose my motivation.
 - [x] As a user, I want to see the prority of my tasks so that I know what I should do first.
 - [x] As a user, I want to set the time for a specific task so that I can organize my time.
 
