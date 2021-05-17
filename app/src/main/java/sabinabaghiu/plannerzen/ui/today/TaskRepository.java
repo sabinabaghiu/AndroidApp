@@ -36,9 +36,9 @@ public class TaskRepository {
         return task;
     }
 
-//    public ArrayList<Task> getTasksForToday(){
-//        return task.tasksForToday();
-//    }
+    public void deleteTask(String id){
+        myRef.child(id).removeValue();
+    }
 
 
 }

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.SwipeItemTouchHelperHabits;
 
 
 public class HabitsFragment extends Fragment {
@@ -66,28 +67,9 @@ public class HabitsFragment extends Fragment {
         });
 
             //swiping for edit and delete
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouchHelperHabits(habitListsAdapter));
         itemTouchHelper.attachToRecyclerView(habitRecyclerView);
+
         return root;
         }
-
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-
-                switch (direction){
-                    case ItemTouchHelper.LEFT:
-
-                        break;
-                    case ItemTouchHelper.RIGHT:
-
-                }
-            }
-        };
 }

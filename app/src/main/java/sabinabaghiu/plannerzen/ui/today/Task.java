@@ -7,6 +7,7 @@ public class Task {
     private int time;
     private boolean isImportant;
     private boolean isDone;
+    private String id;
 
     public Task() {
     }
@@ -17,6 +18,14 @@ public class Task {
         this.isImportant = isImportant;
         this.date = date;
         this.isDone = false;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isDone() {

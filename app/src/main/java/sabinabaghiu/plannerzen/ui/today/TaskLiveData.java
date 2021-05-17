@@ -25,6 +25,7 @@ public class TaskLiveData extends LiveData<ArrayList<Task>> {
             ArrayList<Task> tasks = new ArrayList<>();
             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                 Task task = dataSnapshot.getValue(Task.class);
+                task.setId(dataSnapshot.getKey());
                 tasks.add(task);
                 setValue(tasks);
             }
@@ -36,33 +37,6 @@ public class TaskLiveData extends LiveData<ArrayList<Task>> {
         }
     };
 
-//    public ArrayList<Task> tasksForToday (){
-//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-//        Date date = new Date();
-//        String myDate = format.format(date);
-//        ArrayList<Task> tasksToday = new ArrayList<>();
-//        Application application = new Application();
-//        databaseReference = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
-//        String currentUser = UserRepository.getInstance(application).getCurrentUser().getValue().getUid();
-//
-//        databaseReference.child("Users").child(currentUser).child("Tasks").orderByChild("date").equalTo(myDate).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                tasksToday.clear();
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    Task task = dataSnapshot.getValue(Task.class);
-//                    tasksToday.add(task);
-//                    setValue(tasksToday);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//       return tasksToday;
-//    }
 
     DatabaseReference databaseReference;
 
