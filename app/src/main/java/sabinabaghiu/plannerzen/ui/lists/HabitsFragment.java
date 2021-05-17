@@ -15,15 +15,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.SwipeItemTouchHelperHabits;
 
 
 public class HabitsFragment extends Fragment {
 
-    private ListsViewModel listsViewModel;
+    private HabitsViewModel habitsViewModel;
     private RecyclerView habitRecyclerView;
     private TextView habitTextView;
     private HabitListsAdapter habitListsAdapter;
@@ -31,10 +31,14 @@ public class HabitsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        listsViewModel =
-                new ViewModelProvider(this).get(ListsViewModel.class);
+        habitsViewModel =
+                new ViewModelProvider(this).get(HabitsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_habits, container, false);
-        listsViewModel.initHabit();
+        habitsViewModel.init();
+        BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+        if (navigationView != null)
+            navigationView.setVisibility(View.VISIBLE);
+
 
             //habit recycler view
         habitRecyclerView = root.findViewById(R.id.recyclerViewHabitMyLists);
@@ -43,7 +47,7 @@ public class HabitsFragment extends Fragment {
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         habitListsAdapter = new HabitListsAdapter(getContext());
         habitRecyclerView.setAdapter(habitListsAdapter);
-        listsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
+        habitsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
             if (habits.size() == 0) {
                 habitRecyclerView.setVisibility(View.INVISIBLE);
                 habitTextView.setVisibility(View.VISIBLE);

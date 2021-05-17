@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.ui.lists.TasksViewModel;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private ArrayList<Task> tasks = new ArrayList<>();
     private Context context;
+    private static TasksViewModel instance;
 
     public TaskAdapter(Context context){
         this.context = context;
@@ -34,7 +36,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void deleteItem(int position){
         Task task = tasks.get(position);
         TaskRepository.getInstance().deleteTask(task.getId());
+    }
 
+
+    public void getTask(int position){
+        Task task = tasks.get(position);
+//        TasksViewModel tasksViewModel = tasksViewModel.ge
     }
 
     @NonNull

@@ -3,14 +3,9 @@ package sabinabaghiu.plannerzen.ui.today;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-
 public class TaskRepository {
     private static TaskRepository instance;
-    private DatabaseReference myRef, myRefToday;
+    private DatabaseReference myRef;
     private DatabaseReference userReference;
     private TaskLiveData task;
 
@@ -36,9 +31,8 @@ public class TaskRepository {
         return task;
     }
 
+
     public void deleteTask(String id){
         myRef.child(id).removeValue();
     }
-
-
 }

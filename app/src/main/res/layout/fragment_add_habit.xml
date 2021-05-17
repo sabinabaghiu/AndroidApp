@@ -7,6 +7,8 @@
         android:id="@+id/add_habit_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:ems="10"
         android:hint="Title"
         android:layout_marginTop="20dp"/>
@@ -15,6 +17,8 @@
         android:id="@+id/add_habit_goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:ems="10"
         android:hint="Goal"
         android:layout_marginTop="10dp"/>
@@ -24,6 +28,7 @@
         android:layout_width="162dp"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
         android:layout_marginBottom="20dp"
         />
 

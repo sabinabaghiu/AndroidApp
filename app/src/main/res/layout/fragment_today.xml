@@ -29,6 +29,7 @@
         android:id="@+id/textViewNoTodosToday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
         android:text="There are no tasks for today"
         android:textColor="@color/black"
         android:textSize="17dp" />
@@ -52,6 +53,7 @@
         android:id="@+id/textViewNoHabitsToday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
         android:text="There are no habits that you want to build for now"
         android:textColor="@color/black"
         android:textSize="17dp" />

@@ -16,16 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
 
 public class TodayFragment extends Fragment {
 
@@ -35,7 +31,7 @@ public class TodayFragment extends Fragment {
     private TextView taskTextView, habitTextView;
     private TaskAdapter taskAdapter;
     private HabitTodayAdapter habitTodayAdapter;
-    Application application;
+     Application application;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,7 +51,6 @@ public class TodayFragment extends Fragment {
         taskRecyclerView.setAdapter(taskAdapter);
         todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();
-//            int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
             String myDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
             ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().equals(myDate)).collect(Collectors.toList());
             taskAdapter.UpdateList(tasksToday);

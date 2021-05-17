@@ -2,16 +2,10 @@ package sabinabaghiu.plannerzen.ui.login;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.navigation.Navigation;
 
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
-
-import sabinabaghiu.plannerzen.R;
 
 public class UserRepository {
 

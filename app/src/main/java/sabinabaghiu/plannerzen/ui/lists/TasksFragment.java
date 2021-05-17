@@ -15,26 +15,29 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.SwipeItemTouchHelperTasks;
 import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
 public class TasksFragment extends Fragment {
 
 
-    private ListsViewModel listsViewModel;
+    private TasksViewModel tasksViewModel;
     private RecyclerView taskRecyclerView;
     private TextView taskTextView;
     private TaskAdapter taskAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        listsViewModel =
-                new ViewModelProvider(this).get(ListsViewModel.class);
+        tasksViewModel =
+                new ViewModelProvider(this).get(TasksViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tasks, container, false);
-        listsViewModel.initTask();
+        tasksViewModel.init();
+        BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+        if (navigationView != null)
+            navigationView.setVisibility(View.VISIBLE);
 
 
             //task recycler view
@@ -44,7 +47,7 @@ public class TasksFragment extends Fragment {
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         taskAdapter = new TaskAdapter(getContext());
         taskRecyclerView.setAdapter(taskAdapter);
-        listsViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
+        tasksViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             if (tasks.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
                 taskTextView.setVisibility(View.VISIBLE);

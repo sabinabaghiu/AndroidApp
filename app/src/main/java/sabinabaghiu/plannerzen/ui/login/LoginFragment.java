@@ -19,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Arrays;
 import java.util.List;
 
-import sabinabaghiu.plannerzen.MainActivity;
 import sabinabaghiu.plannerzen.R;
 
 public class LoginFragment extends Fragment {
