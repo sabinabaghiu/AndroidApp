@@ -8,12 +8,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-public class HabitLiveData extends LiveData<Habit> {
+import java.util.ArrayList;
+
+public class HabitLiveData extends LiveData<ArrayList<Habit>> {
     private final ValueEventListener listener = new ValueEventListener() {
+
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {
-            Habit habit = snapshot.getValue(Habit.class);
-            setValue(habit);
+            ArrayList<Habit> habits = new ArrayList<>();
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                Habit habit = dataSnapshot.getValue(Habit.class);
+                habit.setId(dataSnapshot.getKey());
+                habits.add(habit);
+                setValue(habits);
+            }
         }
 
         @Override
@@ -23,7 +31,7 @@ public class HabitLiveData extends LiveData<Habit> {
     };
     DatabaseReference databaseReference;
 
-    public HabitLiveData(DatabaseReference reference){
+    public HabitLiveData(DatabaseReference reference) {
         databaseReference = reference;
     }
 

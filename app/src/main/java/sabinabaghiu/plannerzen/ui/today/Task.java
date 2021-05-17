@@ -6,17 +6,15 @@ public class Task {
     private String date;
     private int time;
     private boolean isImportant;
-    private String userId;
     private boolean isDone;
 
     public Task() {
     }
 
-    public Task(String userId, String title, int time, boolean isImportant, String date, boolean isDone) {
+    public Task(String title, int time, boolean isImportant, String date, boolean isDone) {
         this.title = title;
         this.time = time;
         this.isImportant = isImportant;
-        this.userId = userId;
         this.date = date;
         this.isDone = false;
     }
@@ -59,14 +57,5 @@ public class Task {
 
     public void setImportant(boolean important) {
         isImportant = important;
-    }
-
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

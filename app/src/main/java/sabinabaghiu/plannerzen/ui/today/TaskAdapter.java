@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.today;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,16 @@ import java.util.ArrayList;
 import sabinabaghiu.plannerzen.R;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private Context context;
 
-    private ArrayList<Task> tasks;
+    public TaskAdapter(Context context){
+        this.context = context;
+    }
 
-    TaskAdapter(ArrayList<Task> tasks){
+    public void UpdateList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -26,14 +32,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public TaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.task_list_item, parent, false);
-        return new ViewHolder(view);
+        return new TaskAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
         holder.title.setText(tasks.get(position).getTitle() + " - " + tasks.get(position).getTime() + " min");
-        if (tasks.get(position).isImportant())
-            holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
+        holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
+        if (tasks.get(position).isImportant() == false)
+            holder.icon.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -41,7 +48,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         return tasks.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         ImageView icon;

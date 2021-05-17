@@ -24,7 +24,7 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private RecyclerView profileRecyclerView;
-    private TextView profileTextView;
+    private TextView username, profileTextView;
     HabitProfileAdapter habitProfileAdapter;
     private LoginViewModel loginViewModel;
 
@@ -34,27 +34,29 @@ public class ProfileFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         setHasOptionsMenu(true);
+        profileViewModel.initHabit();
+        username = root.findViewById(R.id.username);
+        username.setText(profileViewModel.getCurrentUser().getValue().getDisplayName());
 
         checkIfSignedIn();
 
-        //habit recycler view
+            //habit recycler view
         profileRecyclerView = root.findViewById(R.id.recyclerViewProfile);
         profileTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        profileViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-//            if (!habits.isEmpty()) {
-//                for (Habit h : habits) {
-//                    profileRecyclerView.setVisibility(View.VISIBLE);
-//                    habitProfileAdapter = new HabitProfileAdapter((ArrayList<Habit>) habits);
-//                    profileRecyclerView.setAdapter(habitProfileAdapter);
-//                    profileTextView.setVisibility(View.GONE);
-//                }
-//            } else {
-//                profileRecyclerView.setVisibility(View.GONE);
-//                profileTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
+        habitProfileAdapter = new HabitProfileAdapter(getContext());
+        profileRecyclerView.setAdapter(habitProfileAdapter);
+        profileViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
+            if (habits.size() == 0) {
+                profileRecyclerView.setVisibility(View.INVISIBLE);
+                profileTextView.setVisibility(View.VISIBLE);
+            }
+            else {
+                profileRecyclerView.setVisibility(View.VISIBLE);
+                profileTextView.setVisibility(View.INVISIBLE);
+                habitProfileAdapter.updateList(habits);
+            }
+        });
 
         return root;
     }

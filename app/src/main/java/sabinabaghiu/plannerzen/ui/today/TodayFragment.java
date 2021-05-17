@@ -1,5 +1,7 @@
 package sabinabaghiu.plannerzen.ui.today;
 
+import android.app.Application;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
@@ -18,59 +30,63 @@ import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
 public class TodayFragment extends Fragment {
 
     private TodayViewModel todayViewModel;
-    private RecyclerView todoRecyclerView;
+    private RecyclerView taskRecyclerView;
     private RecyclerView habitRecyclerView;
-    private TextView todoTextView;
-    private TextView habitTextView;
-    TaskAdapter taskAdapter;
-    HabitTodayAdapter habitTodayAdapter;
-    private LoginViewModel loginViewModel;
+    private TextView taskTextView, habitTextView;
+    private TaskAdapter taskAdapter;
+    private HabitTodayAdapter habitTodayAdapter;
+    Application application;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         todayViewModel =
                 new ViewModelProvider(this).get(TodayViewModel.class);
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         View root = inflater.inflate(R.layout.fragment_today, container, false);
+        application = new Application();
+        todayViewModel.init();
 
+        //task recycler view
+        taskRecyclerView = root.findViewById(R.id.recyclerViewTodoToday);
+        taskTextView = root.findViewById(R.id.textViewNoTodosToday);
+        taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //todo recycler view
-        todoRecyclerView = root.findViewById(R.id.recyclerViewTodoToday);
-        todoTextView = root.findViewById(R.id.textViewNoTodosToday);
-        todoRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        taskAdapter = new TaskAdapter(getContext());
+        taskRecyclerView.setAdapter(taskAdapter);
+        todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
+            Calendar c = new GregorianCalendar();
+//            int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+            String myDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+            ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().equals(myDate)).collect(Collectors.toList());
+            taskAdapter.UpdateList(tasksToday);
+            if (tasksToday.size() == 0) {
+                taskRecyclerView.setVisibility(View.INVISIBLE);
+                    taskTextView.setVisibility(View.VISIBLE);
+            } else {
+                taskRecyclerView.setVisibility(View.VISIBLE);
+                    taskTextView.setVisibility(View.GONE);
+                taskAdapter.UpdateList(tasksToday);
+            }
+        });
 
-//        todayViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-//            if (!todos.isEmpty()) {
-//                for (Todo t : todos) {
-//                    todoRecyclerView.setVisibility(View.VISIBLE);
-//                    todoTodayAdapter = new TodoTodayAdapter((ArrayList<Todo>) todos);
-//                    todoRecyclerView.setAdapter(todoTodayAdapter);
-//                    todoTextView.setVisibility(View.GONE);
-//                }
-//            } else {
-//                todoRecyclerView.setVisibility(View.GONE);
-//                todoTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
 
         //habit recycler view
         habitRecyclerView = root.findViewById(R.id.recyclerViewHabitsToday);
         habitTextView = root.findViewById(R.id.textViewNoHabitsToday);
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        todayViewModel.getAllHabits().observe(getViewLifecycleOwner(), habits -> {
-//            if (!habits.isEmpty()) {
-//                for (Habit h : habits) {
-//                    habitRecyclerView.setVisibility(View.VISIBLE);
-//                    habitTodayAdapter = new HabitTodayAdapter((ArrayList<Habit>) habits);
-//                    habitRecyclerView.setAdapter(habitTodayAdapter);
-//                    habitTextView.setVisibility(View.GONE);
-//                }
-//            } else {
-//                habitRecyclerView.setVisibility(View.GONE);
-//                habitTextView.setVisibility(View.VISIBLE);
-//            }
-//        });
+        habitTodayAdapter = new HabitTodayAdapter(getContext());
+        habitRecyclerView.setAdapter(habitTodayAdapter);
+        todayViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
+            if (habits.size() == 0) {
+                habitRecyclerView.setVisibility(View.INVISIBLE);
+                habitTextView.setVisibility(View.VISIBLE);
+            } else {
+                habitRecyclerView.setVisibility(View.VISIBLE);
+                habitTextView.setVisibility(View.GONE);
+                habitTodayAdapter.updateList(habits);
+            }
+        });
 
         return root;
     }
