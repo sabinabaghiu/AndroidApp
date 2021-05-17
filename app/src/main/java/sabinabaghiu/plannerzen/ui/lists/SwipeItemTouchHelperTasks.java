@@ -1,19 +1,18 @@
-package sabinabaghiu.plannerzen;
+package sabinabaghiu.plannerzen.ui.lists;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
 public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
@@ -31,7 +30,6 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        //        if (viewHolder.itemView.findViewById(R.id.section_divider) != null) return;
         int position = viewHolder.getAdapterPosition();
         if(direction == ItemTouchHelper.LEFT){
             AlertDialog.Builder builder = new AlertDialog.Builder(taskAdapter.getContext());
@@ -53,7 +51,8 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
             dialog.show();
         }
         else {
-            //edit part
+            taskAdapter.getTask(position);
+            Navigation.findNavController((Activity) taskAdapter.getContext(), R.id.nav_host_fragment).navigate(R.id.navigation_edit_task);
         }
     }
 

@@ -25,7 +25,7 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel profileViewModel;
     private RecyclerView profileRecyclerView;
     private TextView username, profileTextView;
-    HabitProfileAdapter habitProfileAdapter;
+    private HabitProfileAdapter habitProfileAdapter;
     private LoginViewModel loginViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

@@ -19,7 +19,7 @@ import sabinabaghiu.plannerzen.R;
 
 
 public class AddHabitFragment extends Fragment {
-    private ListsViewModel listsViewModel;
+    private HabitsViewModel habitsViewModel;
     private Spinner spinner;
     private EditText titleEditText;
     private EditText goalEditText;
@@ -28,12 +28,12 @@ public class AddHabitFragment extends Fragment {
     private int iconId;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listsViewModel = new ViewModelProvider(this).get(ListsViewModel.class);
+        habitsViewModel = new ViewModelProvider(this).get(HabitsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_habit, container, false);
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setVisibility(View.INVISIBLE);
-        listsViewModel.initHabit();
+        habitsViewModel.init();
         titleEditText = root.findViewById(R.id.add_habit_title);
         goalEditText = root.findViewById(R.id.add_habit_goal);
         spinner = root.findViewById(R.id.spinner_habit_icon);
@@ -58,19 +58,16 @@ public class AddHabitFragment extends Fragment {
         saveButton.setOnClickListener(v -> {
             String title = titleEditText.getText().toString().trim();
             int goal = Integer.parseInt(goalEditText.getText().toString().trim());
-            listsViewModel.saveHabit(title, goal, iconId, false, 0);
+            habitsViewModel.saveHabit(title, goal, iconId, false, 0);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_habit_to_navigation_lists);
-            if (navigationView != null)
-                navigationView.setVisibility(View.VISIBLE);
         });
 
         cancelButton.setOnClickListener(v -> {
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_habit_to_navigation_lists);
-            if (navigationView != null)
-                navigationView.setVisibility(View.VISIBLE);
         });
         return root;
     }
+
 
     public List<SpinnerRow> getAllRows(){
         List<SpinnerRow> options = new ArrayList<>();

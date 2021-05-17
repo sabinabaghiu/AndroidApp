@@ -18,7 +18,6 @@ import sabinabaghiu.plannerzen.R;
 
 public class ListsFragment extends Fragment  {
 
-    private ListsViewModel listsViewModel;
     TabLayout tabLayout;
     ViewPager viewPager;
     View fragment;

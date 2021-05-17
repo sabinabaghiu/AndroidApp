@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/navigation_edit_task"
         android:name="sabinabaghiu.plannerzen.ui.lists.EditTaskFragment"
-        android:label="Edit todo list"
+        android:label="Edit task"
         tools:layout="@layout/fragment_edit_task">
         <action
             android:id="@+id/action_navigation_edit_task_to_navigation_lists"

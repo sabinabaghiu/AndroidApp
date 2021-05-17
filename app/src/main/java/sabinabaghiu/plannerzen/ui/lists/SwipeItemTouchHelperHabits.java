@@ -1,11 +1,7 @@
-package sabinabaghiu.plannerzen;
+package sabinabaghiu.plannerzen.ui.lists;
 
 import android.content.DialogInterface;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -14,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AlertDialog;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
-import sabinabaghiu.plannerzen.ui.lists.HabitListsAdapter;
-import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
+import sabinabaghiu.plannerzen.R;
 
 public class SwipeItemTouchHelperHabits extends ItemTouchHelper.SimpleCallback {
     private HabitListsAdapter habitAdapter;
 
     public SwipeItemTouchHelperHabits(HabitListsAdapter habitAdapter){
-        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        super(0, ItemTouchHelper.LEFT);
         this.habitAdapter = habitAdapter;
     }
 
@@ -32,9 +27,7 @@ public class SwipeItemTouchHelperHabits extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        //        if (viewHolder.itemView.findViewById(R.id.section_divider) != null) return;
         int position = viewHolder.getAdapterPosition();
-        if(direction == ItemTouchHelper.LEFT){
                 AlertDialog.Builder builder = new AlertDialog.Builder(habitAdapter.getContext());
                 builder.setTitle("Delete habit");
                 builder.setMessage("Are you sure you want to delete this habit?");
@@ -52,10 +45,6 @@ public class SwipeItemTouchHelperHabits extends ItemTouchHelper.SimpleCallback {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-        }
-        else {
-            //edit part
-        }
     }
 
     @Override
@@ -63,8 +52,6 @@ public class SwipeItemTouchHelperHabits extends ItemTouchHelper.SimpleCallback {
         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                 .addSwipeLeftBackgroundColor(ContextCompat.getColor(habitAdapter.getContext(), R.color.error))
                 .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete_24)
-                .addSwipeRightBackgroundColor(ContextCompat.getColor(habitAdapter.getContext(),R.color.my_yellow))
-                .addSwipeRightActionIcon(R.drawable.ic_baseline_edit_24)
                 .create().decorate();
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
     }

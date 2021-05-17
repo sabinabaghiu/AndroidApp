@@ -24,7 +24,7 @@ import java.util.Calendar;
 import sabinabaghiu.plannerzen.R;
 
 public class AddTaskFragment extends Fragment {
-    private ListsViewModel listsViewModel;
+    private TasksViewModel tasksViewModel;
     private EditText titleEditText, dateEditText, timeEditText;
     private Button saveButton, cancelButton;
     private Switch isImportant;
@@ -33,13 +33,13 @@ public class AddTaskFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        listsViewModel =
-                new ViewModelProvider(this).get(ListsViewModel.class);
+        tasksViewModel =
+                new ViewModelProvider(this).get(TasksViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_task, container, false);
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setVisibility(View.INVISIBLE);
-        listsViewModel.initTask();
+        tasksViewModel.init();
         titleEditText = root.findViewById(R.id.task_add_title);
         dateEditText = root.findViewById(R.id.task_add_date);
         timeEditText = root.findViewById(R.id.task_add_time);
@@ -71,26 +71,17 @@ public class AddTaskFragment extends Fragment {
             }
         });
 
-
         saveButton.setOnClickListener(v ->{
             String title = titleEditText.getText().toString().trim();
             int time = Integer.parseInt(timeEditText.getText().toString().trim());
             boolean isImp = isImportant.isChecked();
-            listsViewModel.saveTask(title, time, isImp, currentDate, false);
+            tasksViewModel.saveTask(title, time, isImp, currentDate, false);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
-
-            if (navigationView != null)
-                navigationView.setVisibility(View.VISIBLE);
         });
-
 
         cancelButton.setOnClickListener(v -> {
-            if (navigationView != null)
-                navigationView.setVisibility(View.VISIBLE);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });
-
-
 
         return root;
     }
