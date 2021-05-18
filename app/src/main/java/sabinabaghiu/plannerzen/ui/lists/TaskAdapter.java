@@ -19,7 +19,7 @@ import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private ArrayList<Task> tasks = new ArrayList<>();
     private Context context;
-    private static TasksViewModel instance;
+//    private static TasksViewModel instance;
 
 
     public TaskAdapter(Context context){
@@ -41,10 +41,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     }
 
 
-    public void getTask(int position){
-        Task task = tasks.get(position);
+//    public void getTask(int position){
+//        Task task = tasks.get(position);
 //        TasksViewModel tasksViewModel = tasksViewModel.ge
-    }
+//    }
 
     @NonNull
     @Override

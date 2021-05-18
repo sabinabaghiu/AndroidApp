@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
 
-public class TaskAdapterToday extends RecyclerView.Adapter<TaskAdapterToday.ViewHolder> {
+public class TaskTodayAdapter extends RecyclerView.Adapter<TaskTodayAdapter.ViewHolder> {
     private ArrayList<Task> tasks = new ArrayList<>();
     private Context context;
 
@@ -23,7 +23,7 @@ public class TaskAdapterToday extends RecyclerView.Adapter<TaskAdapterToday.View
 //        this.context = context;
 //    }
 
-    public TaskAdapterToday(){}
+    public TaskTodayAdapter(){}
 
     public void UpdateList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -36,14 +36,14 @@ public class TaskAdapterToday extends RecyclerView.Adapter<TaskAdapterToday.View
 
     @NonNull
     @Override
-    public TaskAdapterToday.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TaskTodayAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.task_list_item, parent, false);
-        return new TaskAdapterToday.ViewHolder(view);
+        return new TaskTodayAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskAdapterToday.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TaskTodayAdapter.ViewHolder holder, int position) {
         holder.title.setText(tasks.get(position).getTitle() + " - " + tasks.get(position).getTime() + " min");
         holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
         if (tasks.get(position).isImportant() == false)
