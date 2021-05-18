@@ -29,7 +29,7 @@ public class TodayFragment extends Fragment {
     private RecyclerView taskRecyclerView;
     private RecyclerView habitRecyclerView;
     private TextView taskTextView, habitTextView;
-    private TaskAdapter taskAdapter;
+    private TaskAdapterToday taskAdapter;
     private HabitTodayAdapter habitTodayAdapter;
      Application application;
 
@@ -47,7 +47,7 @@ public class TodayFragment extends Fragment {
         taskTextView = root.findViewById(R.id.textViewNoTodosToday);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        taskAdapter = new TaskAdapter(getContext());
+        taskAdapter = new TaskAdapterToday();
         taskRecyclerView.setAdapter(taskAdapter);
         todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();

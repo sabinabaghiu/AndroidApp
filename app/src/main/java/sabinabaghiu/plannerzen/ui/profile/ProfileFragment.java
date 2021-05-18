@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.profile;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -17,6 +19,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+
+import java.util.ArrayList;
+
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.login.LoginViewModel;
 
@@ -24,9 +36,13 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private RecyclerView profileRecyclerView;
-    private TextView username, profileTextView;
+    private TextView tasksHeaderTextView, habitsHeaderTextView, noHabitsTextView, headerTextView;
     private HabitProfileAdapter habitProfileAdapter;
     private LoginViewModel loginViewModel;
+    private PieChart pieChart;
+
+    private float[] yData= {64.3f, 35.7f};
+    private String[] xData = {"tasks done", "tasks not done"};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,30 +51,68 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
         setHasOptionsMenu(true);
         profileViewModel.initHabit();
-        username = root.findViewById(R.id.username);
-        username.setText(profileViewModel.getCurrentUser().getValue().getDisplayName());
-
+        tasksHeaderTextView = root.findViewById(R.id.tasks_profile);
+        habitsHeaderTextView = root.findViewById(R.id.habits_profile);
+        noHabitsTextView = root.findViewById(R.id.textViewNoHabitsProfile);
+        headerTextView = root.findViewById(R.id.header_profile);
         checkIfSignedIn();
+
+            //pie chart
+        pieChart = root.findViewById(R.id.pieChart);
+        setUpPieChart();
 
             //habit recycler view
         profileRecyclerView = root.findViewById(R.id.recyclerViewProfile);
-        profileTextView = root.findViewById(R.id.textViewNoHabitsProfile);
+        noHabitsTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         habitProfileAdapter = new HabitProfileAdapter(getContext());
         profileRecyclerView.setAdapter(habitProfileAdapter);
         profileViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
             if (habits.size() == 0) {
                 profileRecyclerView.setVisibility(View.INVISIBLE);
-                profileTextView.setVisibility(View.VISIBLE);
+                noHabitsTextView.setVisibility(View.VISIBLE);
             }
             else {
                 profileRecyclerView.setVisibility(View.VISIBLE);
-                profileTextView.setVisibility(View.INVISIBLE);
+                noHabitsTextView.setVisibility(View.INVISIBLE);
                 habitProfileAdapter.updateList(habits);
             }
         });
 
         return root;
+    }
+
+    private void setUpPieChart(){
+        pieChart.setHoleRadius(0);
+        pieChart.setRotationEnabled(false);
+        pieChart.setTransparentCircleAlpha(0);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+
+        loadPieChartData();
+    }
+
+    private void loadPieChartData(){
+            //data
+        ArrayList<PieEntry> yEntries = new ArrayList<>();
+        for(int i = 0; i < yData.length; i++) {
+            yEntries.add(new PieEntry(yData[i], i));
+        }
+
+        ArrayList<String> xEntries = new ArrayList<>();
+        for(int i = 1; i < xData.length; i++){
+            xEntries.add(xData[i]);
+        }
+            //data set
+        PieDataSet pieDataSet = new PieDataSet(yEntries, "Was done");
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.BLUE);
+        colors.add(Color.RED);
+        pieDataSet.setColors(colors);
+            //create pie chart
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.invalidate();
     }
 
     @Override

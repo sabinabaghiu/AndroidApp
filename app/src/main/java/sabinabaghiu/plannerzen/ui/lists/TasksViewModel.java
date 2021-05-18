@@ -17,7 +17,16 @@ import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 public class TasksViewModel extends AndroidViewModel {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+    private static TasksViewModel instance;
     private MutableLiveData<Task> editingTask;
+    private Application application;
+
+//    public static synchronized TasksViewModel getInstance(){
+//        if (instance == null)
+//            instance = new TasksViewModel(a);
+//        return instance;
+//    }
+
 
     public TasksViewModel(Application application) {
         super(application);

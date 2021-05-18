@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
 public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
     private TaskAdapter taskAdapter;
