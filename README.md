@@ -25,5 +25,5 @@ Could have requirements
 
 Won't have requirements
 
-- [ ] As a user, I want to have my profile connected with Google Calendar.
-- [ ] As a user, I want other people to have access to my schedule.
+- [x] As a user, I want to have my profile connected with Google Calendar.
+- [x] As a user, I want other people to have access to my schedule.
