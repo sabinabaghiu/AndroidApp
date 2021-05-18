@@ -1,41 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_marginTop="10dp"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/profile"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
-        tools:ignore="MissingConstraints"
-        android:layout_gravity="center"/>
-
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/header_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username"
+        android:text="My progress"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/profile_image"
         android:layout_gravity="center"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <TextView
+        android:id="@+id/tasks_profile"
         android:layout_width="match_parent"
-        android:layout_height="134dp"
-        android:scaleY="10" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="Tasks overall"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="228dp">
+
+    </com.github.mikephil.charting.charts.PieChart>
+
+    <TextView
+        android:id="@+id/habits_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="Habits overall"
+        android:textColor="@color/black"
+        android:textSize="17dp" />
 
         <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -47,6 +59,8 @@
         android:id="@+id/textViewNoHabitsProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:text="There are no habits to show"
         android:textColor="@color/black"
         android:textSize="17dp" />

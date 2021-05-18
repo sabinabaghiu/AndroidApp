@@ -19,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.today.TaskAdapter;
 
 public class TasksFragment extends Fragment {
 

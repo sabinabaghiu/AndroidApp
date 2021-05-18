@@ -13,47 +13,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import sabinabaghiu.plannerzen.R;
-import sabinabaghiu.plannerzen.ui.lists.TasksViewModel;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+public class TaskAdapterToday extends RecyclerView.Adapter<TaskAdapterToday.ViewHolder> {
     private ArrayList<Task> tasks = new ArrayList<>();
     private Context context;
-    private static TasksViewModel instance;
 
-    public TaskAdapter(Context context){
-        this.context = context;
-    }
+
+//    public TaskAdapterToday(Context context){
+//        this.context = context;
+//    }
+
+    public TaskAdapterToday(){}
 
     public void UpdateList(ArrayList<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
     }
 
-    public Context getContext(){
-        return context;
-    }
-
-    public void deleteItem(int position){
-        Task task = tasks.get(position);
-        TaskRepository.getInstance().deleteTask(task.getId());
-    }
-
-
-    public void getTask(int position){
-        Task task = tasks.get(position);
-//        TasksViewModel tasksViewModel = tasksViewModel.ge
-    }
+//    public Context getContext(){
+//        return context;
+//    }
 
     @NonNull
     @Override
-    public TaskAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TaskAdapterToday.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.task_list_item, parent, false);
-        return new TaskAdapter.ViewHolder(view);
+        return new TaskAdapterToday.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TaskAdapterToday.ViewHolder holder, int position) {
         holder.title.setText(tasks.get(position).getTitle() + " - " + tasks.get(position).getTime() + " min");
         holder.icon.setImageResource(R.drawable.ic_baseline_priority_high_24);
         if (tasks.get(position).isImportant() == false)
