@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -106,8 +107,8 @@ public class ProfileFragment extends Fragment {
             //data set
         PieDataSet pieDataSet = new PieDataSet(yEntries, "Was done");
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
+        colors.add(ColorTemplate.rgb("6DC2CD"));
+        colors.add(ColorTemplate.rgb("B885F6"));
         pieDataSet.setColors(colors);
             //create pie chart
         PieData pieData = new PieData(pieDataSet);

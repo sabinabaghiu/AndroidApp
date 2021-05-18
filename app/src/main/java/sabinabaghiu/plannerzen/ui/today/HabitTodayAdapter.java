@@ -18,9 +18,11 @@ import sabinabaghiu.plannerzen.R;
 public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.ViewHolder> {
     private ArrayList<Habit> habits = new ArrayList<>();
     private Context context;
+//    private HabitCardAdapterOnClickListener listener;
 
     HabitTodayAdapter(Context context){
         this.context = context;
+//        this.listener = listener;
     }
 
     public void updateList(ArrayList<Habit> habits){
@@ -38,9 +40,11 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull HabitTodayAdapter.ViewHolder holder, int position) {
+        Habit currentHabit = habits.get(position);
         holder.title.setText(habits.get(position).getTitle());
         holder.icon.setImageResource(habits.get(position).getIconId());
         holder.checkBox.setChecked(habits.get(position).isDone());
+//        holder.checkBox.setOnClickListener(view -> listener.onHabitCardClick(currentHabit));
     }
 
     @Override
@@ -62,4 +66,8 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
             checkBox = itemView.findViewById(R.id.checkBox_habit_done);
         }
     }
+
+//    public interface HabitCardAdapterOnClickListener{
+//        void onHabitCardClick(Habit habit);
+//    }
 }

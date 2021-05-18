@@ -29,9 +29,9 @@ public class TodayFragment extends Fragment {
     private RecyclerView taskRecyclerView;
     private RecyclerView habitRecyclerView;
     private TextView taskTextView, habitTextView;
-    private TaskAdapterToday taskAdapter;
+    private TaskTodayAdapter taskTodayAdapter;
     private HabitTodayAdapter habitTodayAdapter;
-     Application application;
+    Application application;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -47,20 +47,20 @@ public class TodayFragment extends Fragment {
         taskTextView = root.findViewById(R.id.textViewNoTodosToday);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        taskAdapter = new TaskAdapterToday();
-        taskRecyclerView.setAdapter(taskAdapter);
+        taskTodayAdapter = new TaskTodayAdapter();
+        taskRecyclerView.setAdapter(taskTodayAdapter);
         todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();
             String myDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
             ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().equals(myDate)).collect(Collectors.toList());
-            taskAdapter.UpdateList(tasksToday);
+            taskTodayAdapter.UpdateList(tasksToday);
             if (tasksToday.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
-                    taskTextView.setVisibility(View.VISIBLE);
+                taskTextView.setVisibility(View.VISIBLE);
             } else {
                 taskRecyclerView.setVisibility(View.VISIBLE);
-                    taskTextView.setVisibility(View.GONE);
-                taskAdapter.UpdateList(tasksToday);
+                taskTextView.setVisibility(View.GONE);
+                taskTodayAdapter.UpdateList(tasksToday);
             }
         });
 
