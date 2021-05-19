@@ -47,6 +47,7 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    compile 'com.github.AnyChart:AnyChart-Android:0.0.3'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
     implementation 'com.firebaseui:firebase-ui-auth:6.4.0'

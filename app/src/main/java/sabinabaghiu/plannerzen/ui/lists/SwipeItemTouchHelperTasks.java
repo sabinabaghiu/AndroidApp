@@ -29,6 +29,7 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+        if (viewHolder.itemView.findViewById(R.id.date_item) != null) return;
         int position = viewHolder.getAdapterPosition();
         if(direction == ItemTouchHelper.LEFT){
             AlertDialog.Builder builder = new AlertDialog.Builder(taskAdapter.getContext());
@@ -50,13 +51,14 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
             dialog.show();
         }
         else {
-            taskAdapter.getTask(position);
+//            taskAdapter.getTask(position);
             Navigation.findNavController((Activity) taskAdapter.getContext(), R.id.nav_host_fragment).navigate(R.id.navigation_edit_task);
         }
     }
 
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            if (viewHolder.itemView.findViewById(R.id.date_item) != null) return;
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftBackgroundColor(ContextCompat.getColor(taskAdapter.getContext(), R.color.error))
                     .addSwipeLeftActionIcon(R.drawable.ic_baseline_delete_24)
