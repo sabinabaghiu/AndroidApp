@@ -1,10 +1,14 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 
+import java.util.Calendar;
+import com.google.firebase.database.Exclude;
+
 public class Task implements Comparable<Task>{
     private String title;
-    private String date;
+    private Calendar date;
     private int time;
+    private long timestamp;
     private boolean isImportant;
     private boolean isDone;
     private String id;
@@ -12,12 +16,21 @@ public class Task implements Comparable<Task>{
     public Task() {
     }
 
-    public Task(String title, int time, boolean isImportant, String date, boolean isDone) {
+    public Task(String title, int time, boolean isImportant, Calendar date, boolean isDone) {
         this.title = title;
         this.time = time;
         this.isImportant = isImportant;
         this.date = date;
         this.isDone = false;
+        timestamp = date.getTimeInMillis();
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -36,11 +49,12 @@ public class Task implements Comparable<Task>{
         isDone = done;
     }
 
-    public String getDate() {
+    @Exclude
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 

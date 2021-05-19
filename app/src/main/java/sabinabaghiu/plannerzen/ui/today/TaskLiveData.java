@@ -9,6 +9,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class TaskLiveData extends LiveData<ArrayList<Task>> {
     private final ValueEventListener listener = new ValueEventListener() {
@@ -18,10 +20,13 @@ public class TaskLiveData extends LiveData<ArrayList<Task>> {
             ArrayList<Task> tasks = new ArrayList<>();
             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                 Task task = dataSnapshot.getValue(Task.class);
+                Calendar timestamp = new GregorianCalendar();
+                timestamp.setTimeInMillis((Long) dataSnapshot.child("timestamp").getValue());
+                task.setDate(timestamp);
+                task.getDate().getTimeInMillis();
                 task.setId(dataSnapshot.getKey());
-                tasks.add(task);
+                tasks.add(task); }
                 setValue(tasks);
-            }
         }
 
         @Override

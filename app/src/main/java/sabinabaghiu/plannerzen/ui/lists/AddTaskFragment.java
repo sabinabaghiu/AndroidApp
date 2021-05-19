@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import sabinabaghiu.plannerzen.R;
 
@@ -29,7 +30,8 @@ public class AddTaskFragment extends Fragment {
     private Button saveButton, cancelButton;
     private Switch isImportant;
     private DatePickerDialog datePicker;
-    private String currentDate;
+    private int selectedDay, selectedMonth, selectedYear;
+    private Calendar currentDate;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,21 +62,22 @@ public class AddTaskFragment extends Fragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                calendar.set(Calendar.YEAR, year);
-                                calendar.set(Calendar.MONTH, month);
-                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                                selectedDay = dayOfMonth;
+                                selectedMonth = month;
+                                selectedYear = year;
                                 dateEditText.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-                                currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+                                currentDate = new GregorianCalendar(selectedYear, selectedMonth, selectedDay);
                             }
                         }, year, month, day);
                 datePicker.show();
             }
         });
 
-        saveButton.setOnClickListener(v ->{
+        saveButton.setOnClickListener(v -> {
             String title = titleEditText.getText().toString().trim();
             int time = Integer.parseInt(timeEditText.getText().toString().trim());
             boolean isImp = isImportant.isChecked();
+            long timestamp = currentDate.getTimeInMillis();
             tasksViewModel.saveTask(title, time, isImp, currentDate, false);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });

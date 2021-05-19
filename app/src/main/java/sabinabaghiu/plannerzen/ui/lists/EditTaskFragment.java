@@ -16,6 +16,8 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Calendar;
+
 import sabinabaghiu.plannerzen.R;
 
 public class EditTaskFragment extends Fragment {
@@ -24,7 +26,7 @@ public class EditTaskFragment extends Fragment {
     private Button saveButton, cancelButton;
     private Switch isImportant;
     private DatePickerDialog datePicker;
-    private String currentDate;
+    private Calendar currentDate;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class EditTaskFragment extends Fragment {
             String title = titleEditText.getText().toString().trim();
             int time = Integer.parseInt(timeEditText.getText().toString().trim());
             boolean isImp = isImportant.isChecked();
-            tasksViewModel.saveTask(title, time, isImp, currentDate, false);
+//            tasksViewModel.saveTask(title, time, isImp, currentDate, timestamp, false);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });
 
