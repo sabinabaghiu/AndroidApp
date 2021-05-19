@@ -56,7 +56,17 @@ public class TasksFragment extends Fragment {
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         taskAdapter = new TaskAdapter(getContext());
         taskRecyclerView.setAdapter(taskAdapter);
+
         tasksViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
+            Calendar c = new GregorianCalendar();
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int month = c.get(Calendar.MONTH);
+            int year = c.get(Calendar.YEAR);
+            Calendar currentDate = new GregorianCalendar(year, month, day);
+            Long myDate = currentDate.getTimeInMillis();
+
+            ArrayList<Task> tasksToShow = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() >= myDate).collect(Collectors.toList());
+                taskAdapter.UpdateList(tasksToShow);
             if (tasks.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
                 taskTextView.setVisibility(View.VISIBLE);
@@ -64,35 +74,9 @@ public class TasksFragment extends Fragment {
             else {
                 taskRecyclerView.setVisibility(View.VISIBLE);
                 taskTextView.setVisibility(View.INVISIBLE);
-                try {
-                    taskAdapter.UpdateList(tasks);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                taskAdapter.UpdateList(tasksToShow);
             }
         });
-//        tasksViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
-//            Calendar c = new GregorianCalendar();
-//            ArrayList<Task> tasksToShow = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().after(c)).collect(Collectors.toList());
-//            try {
-//                taskAdapter.UpdateList(tasksToShow);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            if (tasks.size() == 0) {
-//                taskRecyclerView.setVisibility(View.INVISIBLE);
-//                taskTextView.setVisibility(View.VISIBLE);
-//            }
-//            else {
-//                taskRecyclerView.setVisibility(View.VISIBLE);
-//                taskTextView.setVisibility(View.INVISIBLE);
-//                try {
-//                    taskAdapter.UpdateList(tasksToShow);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
 
             //swiping for edit and delete
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouchHelperTasks(taskAdapter));

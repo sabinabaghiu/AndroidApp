@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 
@@ -51,8 +52,13 @@ public class TodayFragment extends Fragment {
         taskRecyclerView.setAdapter(taskTodayAdapter);
         todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();
-            String myDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-            ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().equals(myDate)).collect(Collectors.toList());
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int month = c.get(Calendar.MONTH);
+            int year = c.get(Calendar.YEAR);
+            Calendar currentDate = new GregorianCalendar(year, month, day);
+            Long myDate = currentDate.getTimeInMillis();
+
+            ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() == (myDate)).collect(Collectors.toList());
             taskTodayAdapter.UpdateList(tasksToday);
             if (tasksToday.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
