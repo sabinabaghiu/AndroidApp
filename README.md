@@ -21,7 +21,7 @@ Should have requirements
 
 Could have requirements
 
-- [ ] As a user, I want to have statistics so that I can see my progress.
+- [x] As a user, I want to have statistics so that I can see my progress.
 
 Won't have requirements
 
