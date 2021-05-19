@@ -21,8 +21,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 import sabinabaghiu.plannerzen.R;
+import sabinabaghiu.plannerzen.ui.today.Task;
 
 public class TasksFragment extends Fragment {
 
@@ -66,6 +71,28 @@ public class TasksFragment extends Fragment {
                 }
             }
         });
+//        tasksViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
+//            Calendar c = new GregorianCalendar();
+//            ArrayList<Task> tasksToShow = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().after(c)).collect(Collectors.toList());
+//            try {
+//                taskAdapter.UpdateList(tasksToShow);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            if (tasks.size() == 0) {
+//                taskRecyclerView.setVisibility(View.INVISIBLE);
+//                taskTextView.setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                taskRecyclerView.setVisibility(View.VISIBLE);
+//                taskTextView.setVisibility(View.INVISIBLE);
+//                try {
+//                    taskAdapter.UpdateList(tasksToShow);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
             //swiping for edit and delete
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouchHelperTasks(taskAdapter));

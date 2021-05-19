@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import sabinabaghiu.plannerzen.R;
@@ -33,7 +34,6 @@ import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ArrayList<DateOrTask> sections = new ArrayList<>();
         private Context context;
-//    private static TasksViewModel instance;
 
     public TaskAdapter(Context context){
         this.context = context;
@@ -46,18 +46,22 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void UpdateList(List<Task> tasks) throws ParseException {
-        Map<String, List<Task>> map = new HashMap<>();
+        Map<Calendar, List<Task>> map = new HashMap<>();
         if (tasks != null){
             for (Task task : tasks) {
-                String date = task.getDate();
-                Calendar c = new GregorianCalendar();
+                Calendar date = task.getDate();
+                date.set(Calendar.HOUR_OF_DAY, 0);
+                date.set(Calendar.MINUTE, 0);
+                date.set(Calendar.SECOND, 0);
+                date.set(Calendar.MILLISECOND, 0);
+//                Calendar c = new GregorianCalendar();
                 if (map.containsKey(date)){
                     List<Task> list = map.get(date);
                     list.add(task);
                 }
                 else
                 {
-                    List<Task> list = new ArrayList<Task>();
+                    List<Task> list = new ArrayList<>();
                     list.add(task);
                     map.put(date, list);
                 }
@@ -65,11 +69,11 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         ArrayList<DateOrTask> groupedTasks = new ArrayList<>();
-        List<String> sortByDate = new ArrayList<>(map.keySet());
+        List<Calendar> sortByDate = new ArrayList<>(map.keySet());
         Collections.sort(sortByDate);
         Collections.reverse(sortByDate);
 
-        for (String date : sortByDate) {
+        for (Calendar date : sortByDate) {
             groupedTasks.add(DateOrTask.createDate(date));
             List<Task> tasksByDate = map.get(date);
             Collections.sort(tasksByDate);
@@ -123,7 +127,8 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 h.icon.setVisibility(View.INVISIBLE);
         } else {
             DateViewHolder h = (DateViewHolder) holder;
-            h.date.setText(section.getDate());
+            Calendar date = section.getDate();
+            h.date.setText(date.get(Calendar.DATE)+ " " + date.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()) + " " + date.get(Calendar.YEAR));
         }
     }
 
@@ -143,12 +148,12 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private boolean compareDates(String date1, String date2) throws ParseException {
-        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
-        Date d1 = sdformat.parse(date1);
-        Date d2 = sdformat.parse(date2);
-        return d1.before(d2);
-    }
+//    private boolean compareDates(String date1, String date2) throws ParseException {
+//        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+//        Date d1 = sdformat.parse(date1);
+//        Date d2 = sdformat.parse(date2);
+//        return d1.before(d2);
+//    }
 
     public class TaskViewHolder extends RecyclerView.ViewHolder {
 

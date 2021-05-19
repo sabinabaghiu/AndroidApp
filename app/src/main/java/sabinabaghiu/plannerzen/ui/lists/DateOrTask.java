@@ -1,13 +1,15 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
+import java.util.Calendar;
+
 import sabinabaghiu.plannerzen.ui.today.Task;
 
 public class DateOrTask {
     private Task task;
-    private String date;
+    private Calendar date;
     private boolean isTask;
 
-    public static DateOrTask createDate(String date){
+    public static DateOrTask createDate(Calendar date){
         DateOrTask created = new DateOrTask();
         created.date = date;
         created.isTask = false;
@@ -25,7 +27,7 @@ public class DateOrTask {
         return task;
     }
 
-    public String getDate() {
+    public Calendar getDate() {
         return date;
     }
 

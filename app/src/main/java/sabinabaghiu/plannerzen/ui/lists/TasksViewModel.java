@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import sabinabaghiu.plannerzen.ui.login.UserRepository;
 import sabinabaghiu.plannerzen.ui.today.Task;
@@ -42,7 +43,7 @@ public class TasksViewModel extends AndroidViewModel {
         return userRepository.getCurrentUser();
     }
 
-    public void saveTask(String title, int time, boolean isImportant, String date, boolean isDone) {
+    public void saveTask(String title, int time, boolean isImportant, Calendar date, boolean isDone) {
         taskRepository.saveTask(title, time, isImportant, date, isDone);
     }
 

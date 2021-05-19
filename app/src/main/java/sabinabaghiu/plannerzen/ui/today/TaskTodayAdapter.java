@@ -19,10 +19,6 @@ public class TaskTodayAdapter extends RecyclerView.Adapter<TaskTodayAdapter.View
     private Context context;
 
 
-//    public TaskAdapterToday(Context context){
-//        this.context = context;
-//    }
-
     public TaskTodayAdapter(){}
 
     public void UpdateList(ArrayList<Task> tasks) {
@@ -30,9 +26,6 @@ public class TaskTodayAdapter extends RecyclerView.Adapter<TaskTodayAdapter.View
         notifyDataSetChanged();
     }
 
-//    public Context getContext(){
-//        return context;
-//    }
 
     @NonNull
     @Override
