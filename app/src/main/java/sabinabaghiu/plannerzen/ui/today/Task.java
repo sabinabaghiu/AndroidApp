@@ -1,7 +1,7 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 
-public class Task {
+public class Task implements Comparable<Task>{
     private String title;
     private String date;
     private int time;
@@ -66,5 +66,13 @@ public class Task {
 
     public void setImportant(boolean important) {
         isImportant = important;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (getDate() == null || task.getDate() == null) {
+            return 0;
+        }
+        return getDate().compareTo(task.getDate());
     }
 }

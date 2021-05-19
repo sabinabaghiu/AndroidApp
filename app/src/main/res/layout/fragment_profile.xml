@@ -30,12 +30,17 @@
         android:textColor="@color/black"
         android:textSize="17dp" />
 
-    <com.github.mikephil.charting.charts.PieChart
+<!--    <com.github.mikephil.charting.charts.PieChart-->
+<!--        android:id="@+id/pieChart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="228dp">-->
+
+<!--    </com.github.mikephil.charting.charts.PieChart>-->
+
+    <com.anychart.anychart.AnyChartView
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="228dp">
-
-    </com.github.mikephil.charting.charts.PieChart>
+        android:layout_height="173dp" />
 
     <TextView
         android:id="@+id/habits_profile"

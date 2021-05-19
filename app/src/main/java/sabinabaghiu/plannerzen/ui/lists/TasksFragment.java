@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+
 import sabinabaghiu.plannerzen.R;
 
 public class TasksFragment extends Fragment {
@@ -28,6 +32,7 @@ public class TasksFragment extends Fragment {
     private TextView taskTextView;
     private TaskAdapter taskAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         tasksViewModel =
@@ -54,7 +59,11 @@ public class TasksFragment extends Fragment {
             else {
                 taskRecyclerView.setVisibility(View.VISIBLE);
                 taskTextView.setVisibility(View.INVISIBLE);
-                taskAdapter.UpdateList(tasks);
+                try {
+                    taskAdapter.UpdateList(tasks);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

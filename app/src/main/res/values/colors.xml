@@ -10,6 +10,6 @@
     <color name="my_yellow">#FFD185</color>
     <color name="background_login">#F3F3F3</color>
     <color name="error">#FF0000</color>
-    <color name="pieChart">#6DC2CD</color>
-    <color name="pieChart2">#B885F6</color>
+    <color name="pieChart">#C54607</color>
+    <color name="pieChart2">#8F0000</color>
 </resources>
