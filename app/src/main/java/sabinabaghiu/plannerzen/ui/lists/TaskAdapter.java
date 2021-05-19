@@ -45,7 +45,7 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void UpdateList(List<Task> tasks) throws ParseException {
+    public void UpdateList(List<Task> tasks) {
         Map<Calendar, List<Task>> map = new HashMap<>();
         if (tasks != null){
             for (Task task : tasks) {
@@ -71,13 +71,11 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ArrayList<DateOrTask> groupedTasks = new ArrayList<>();
         List<Calendar> sortByDate = new ArrayList<>(map.keySet());
         Collections.sort(sortByDate);
-        Collections.reverse(sortByDate);
 
         for (Calendar date : sortByDate) {
             groupedTasks.add(DateOrTask.createDate(date));
             List<Task> tasksByDate = map.get(date);
             Collections.sort(tasksByDate);
-            Collections.reverse(tasksByDate);
             for (Task task : tasksByDate) {
                 groupedTasks.add(DateOrTask.createTask(task));
             }

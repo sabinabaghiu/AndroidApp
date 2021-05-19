@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
     private LoginViewModel loginViewModel;
     private TaskTodayAdapter taskTodayAdapter;
     private PieChart pieChart;
-    int countTasksDone, countTasksNotDone;
+    int countTasksDone = 0, countTasksNotDone = 0;
 
 //    private float[] yData= {64.3f, 35.7f};
 //    private String[] xData = {"tasks done", "tasks not done"};
@@ -75,37 +75,41 @@ public class ProfileFragment extends Fragment {
         habitsHeaderTextView = root.findViewById(R.id.habits_profile);
         noHabitsTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         headerTextView = root.findViewById(R.id.header_profile);
+
+        AnyChartView pieChartView = root.findViewById(R.id.pieChart);
+        Pie pie = AnyChart.pie();
+        List<DataEntry> data = new ArrayList<>();
         checkIfSignedIn();
 
-            //pie chart
+        //pie chart
 
 //        pieChart = root.findViewById(R.id.pieChart);
 //        setUpPieChart();
 
         profileViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();
-            String myDate = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-            ArrayList<Task> tasksUntilToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getDate().equals(myDate)).collect(Collectors.toList());
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            int month = c.get(Calendar.MONTH);
+            int year = c.get(Calendar.YEAR);
+            Calendar currentDate = new GregorianCalendar(year, month, day);
+            Long myDate = currentDate.getTimeInMillis();
+            ArrayList<Task> tasksUntilToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() < myDate).collect(Collectors.toList());
             for (Task task : tasksUntilToday) {
-                System.out.println(task);
                 if (task.isDone())
                     countTasksDone++;
                 else
                     countTasksNotDone++;
-            }
 
+            }
+            data.add(new ValueDataEntry("Done", countTasksDone));
+            data.add(new ValueDataEntry("Not done", countTasksNotDone));
+
+            pie.data(data);
+            pieChartView.setChart(pie);
         });
 
-        Pie pie = AnyChart.pie();
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Done", countTasksDone));
-        data.add(new ValueDataEntry("Not done", countTasksNotDone));
-        AnyChartView pieChartView = root.findViewById(R.id.pieChart);
-        pie.data(data);
-        pieChartView.setChart(pie);
 
-
-            //habit recycler view
+        //habit recycler view
         profileRecyclerView = root.findViewById(R.id.recyclerViewProfile);
         noHabitsTextView = root.findViewById(R.id.textViewNoHabitsProfile);
         profileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -115,8 +119,7 @@ public class ProfileFragment extends Fragment {
             if (habits.size() == 0) {
                 profileRecyclerView.setVisibility(View.INVISIBLE);
                 noHabitsTextView.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 profileRecyclerView.setVisibility(View.VISIBLE);
                 noHabitsTextView.setVisibility(View.INVISIBLE);
                 habitProfileAdapter.updateList(habits);
@@ -160,20 +163,20 @@ public class ProfileFragment extends Fragment {
 //    }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.profile_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.logout){
+        if (item.getItemId() == R.id.logout) {
             signOut(getView());
             return true;
         } else return false;
     }
 
-    public void signOut(View view){
+    public void signOut(View view) {
         profileViewModel.signOut();
     }
 
