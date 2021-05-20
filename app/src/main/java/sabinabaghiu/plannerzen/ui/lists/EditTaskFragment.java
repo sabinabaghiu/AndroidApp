@@ -77,11 +77,11 @@ public class EditTaskFragment extends Fragment {
 
         saveButton.setOnClickListener(v -> {
             editTaskViewModel.updateTask(selectedTask);
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_edit_task_to_navigation_lists);
         });
 
         cancelButton.setOnClickListener(v -> {
-            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_edit_task_to_navigation_lists);
         });
 
         return root;
