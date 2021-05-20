@@ -31,7 +31,7 @@ public class HabitsViewModel extends AndroidViewModel {
     }
 
 
-    public void saveHabit(String title, int goal, int iconId, boolean isDone, int count) {
+    public void saveHabit(String title, String goal, int iconId, boolean isDone, int count) {
         habitRepository.saveHabit(title, goal, iconId, isDone, count);
     }
 

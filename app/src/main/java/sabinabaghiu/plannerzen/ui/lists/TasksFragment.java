@@ -62,7 +62,7 @@ public class TasksFragment extends Fragment{
 
             ArrayList<Task> tasksToShow = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() >= myDate).collect(Collectors.toList());
                 taskAdapter.UpdateList(tasksToShow);
-            if (tasks.size() == 0) {
+            if (tasksToShow.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
                 taskTextView.setVisibility(View.VISIBLE);
             }

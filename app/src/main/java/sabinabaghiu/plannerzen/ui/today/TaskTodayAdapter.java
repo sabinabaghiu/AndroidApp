@@ -1,8 +1,6 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

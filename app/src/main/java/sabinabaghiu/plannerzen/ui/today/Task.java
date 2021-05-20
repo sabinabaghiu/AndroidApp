@@ -7,7 +7,7 @@ import com.google.firebase.database.Exclude;
 public class Task implements Comparable<Task>{
     private String title;
     private Calendar date;
-    private int time;
+    private String time;
     private long timestamp;
     private boolean isImportant;
     private boolean isDone;
@@ -16,7 +16,7 @@ public class Task implements Comparable<Task>{
     public Task() {
     }
 
-    public Task(String title, int time, boolean isImportant, Calendar date, boolean isDone) {
+    public Task(String title, String time, boolean isImportant, Calendar date, boolean isDone) {
         this.title = title;
         this.time = time;
         this.isImportant = isImportant;
@@ -66,11 +66,11 @@ public class Task implements Comparable<Task>{
         this.title = title;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
