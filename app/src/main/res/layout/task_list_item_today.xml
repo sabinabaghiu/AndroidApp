@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/habit_item_today"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp"
+    android:elevation="0dp"
+    android:layout_marginBottom="7dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/task_important"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_priority_high_24" />
+
+        <TableLayout
+            android:layout_width="323dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="5dp">
+
+            <LinearLayout>
+
+                <TextView
+                    android:id="@+id/task_today_title"
+                    android:layout_width="243dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No chocolate"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+
+                <ImageView
+                    android:id="@+id/task_done"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_priority_high_24" />
+
+            </LinearLayout>
+
+
+        </TableLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

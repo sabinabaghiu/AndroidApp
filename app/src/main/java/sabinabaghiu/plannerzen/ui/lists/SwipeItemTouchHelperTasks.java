@@ -1,13 +1,11 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +14,7 @@ import sabinabaghiu.plannerzen.R;
 
 public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
     private TaskAdapter taskAdapter;
+    private EditTaskViewModel model;
 
     public SwipeItemTouchHelperTasks(TaskAdapter taskAdapter){
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
@@ -51,8 +50,7 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
             dialog.show();
         }
         else {
-//            taskAdapter.getTask(position);
-            Navigation.findNavController((Activity) taskAdapter.getContext(), R.id.nav_host_fragment).navigate(R.id.navigation_edit_task);
+//            taskAdapter.editItem(position);
         }
     }
 

@@ -22,11 +22,7 @@ public class TasksViewModel extends AndroidViewModel {
     private MutableLiveData<Task> editingTask;
     private Application application;
 
-//    public static synchronized TasksViewModel getInstance(){
-//        if (instance == null)
-//            instance = new TasksViewModel(a);
-//        return instance;
-//    }
+
 
 
     public TasksViewModel(Application application) {

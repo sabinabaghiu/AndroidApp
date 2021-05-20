@@ -1,5 +1,6 @@
 package sabinabaghiu.plannerzen.ui.lists;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -10,18 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -34,14 +29,23 @@ import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private ArrayList<DateOrTask> sections = new ArrayList<>();
         private Context context;
+        private EditTaskViewModel model = new EditTaskViewModel();
+        View view;
+//        private final OnItemClickListener itemClickListener;
 
-    public TaskAdapter(Context context){
+//    public TaskAdapter(Context context, OnItemClickListener itemClickListener){
+//        this.context = context;
+//        this.itemClickListener = itemClickListener;
+//
+//    }
+
+    public TaskAdapter(Context context) {
         this.context = context;
     }
 
 
     public Context getContext(){
-        return context;
+        return getContext();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -54,7 +58,6 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 date.set(Calendar.MINUTE, 0);
                 date.set(Calendar.SECOND, 0);
                 date.set(Calendar.MILLISECOND, 0);
-//                Calendar c = new GregorianCalendar();
                 if (map.containsKey(date)){
                     List<Task> list = map.get(date);
                     list.add(task);
@@ -87,16 +90,17 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void deleteItem(int position){
         DateOrTask section = sections.get(position);
-            Task task = section.getTask();
-            TaskRepository.getInstance().deleteTask(task.getId());
-            sections.remove(section);
-            notifyItemRemoved(position);
+        Task task = section.getTask();
+        TaskRepository.getInstance().deleteTask(task.getId());
+        sections.remove(section);
+        notifyItemRemoved(position);
     }
 
-
-//    public void getTask(int position){
-//        Task task = tasks.get(position);
-//        TasksViewModel tasksViewModel = tasksViewModel.ge
+//    public void editItem(int position){
+//        DateOrTask section = sections.get(position);
+//        model.select(section);
+//        Navigation.findNavController((Activity) view.getContext(), R.id.nav_host_fragment).navigate(R.id.navigation_edit_task);
+//        notifyItemChanged(position);
 //    }
 
     @NonNull
@@ -104,11 +108,11 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 1) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View view = inflater.inflate(R.layout.task_list_item, parent, false);
+            view = inflater.inflate(R.layout.task_list_item, parent, false);
             return new TaskViewHolder(view);
         } else {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View view = inflater.inflate(R.layout.date_list_item, parent, false);
+            view = inflater.inflate(R.layout.date_list_item, parent, false);
             return new DateViewHolder(view);
         }
     }
@@ -146,15 +150,9 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-//    private boolean compareDates(String date1, String date2) throws ParseException {
-//        SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
-//        Date d1 = sdformat.parse(date1);
-//        Date d2 = sdformat.parse(date2);
-//        return d1.before(d2);
-//    }
+//    public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder {
-
+    public class TaskViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         ImageView icon;
 
@@ -163,7 +161,13 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             title = itemView.findViewById(R.id.task_add);
             icon = itemView.findViewById(R.id.icon_task);
+//            itemView.setOnClickListener(this);
         }
+
+//        @Override
+//        public void onClick(View v) {
+//            itemClickListener.onItemClick(sections.get(getAdapterPosition()));
+//        }
     }
 
     public  class DateViewHolder extends RecyclerView.ViewHolder {
@@ -174,6 +178,10 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             date = itemView.findViewById(R.id.date_item);
         }
     }
+
+//    public interface OnItemClickListener{
+//        void onItemClick(DateOrTask selectedTask);
+//    }
 
 
 }

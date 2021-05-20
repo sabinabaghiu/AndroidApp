@@ -1,19 +1,26 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 import android.app.Application;
+import android.content.DialogInterface;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -24,15 +31,19 @@ import java.util.stream.Collectors;
 
 import sabinabaghiu.plannerzen.R;
 
-public class TodayFragment extends Fragment {
+public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemClickListener{
 
     private TodayViewModel todayViewModel;
     private RecyclerView taskRecyclerView;
     private RecyclerView habitRecyclerView;
     private TextView taskTextView, habitTextView;
+    private CheckBox taskCheckBox, habitCheckBox;
     private TaskTodayAdapter taskTodayAdapter;
     private HabitTodayAdapter habitTodayAdapter;
+    ArrayList<Task> tasksToday;
     Application application;
+    private DatabaseReference ref;
+    private Task selectedTask;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,12 +54,15 @@ public class TodayFragment extends Fragment {
         application = new Application();
         todayViewModel.init();
 
+        String userId = todayViewModel.getCurrentUser().getValue().getUid();
+        ref = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users").child(userId).child("Tasks");
+
         //task recycler view
         taskRecyclerView = root.findViewById(R.id.recyclerViewTodoToday);
         taskTextView = root.findViewById(R.id.textViewNoTodosToday);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        taskTodayAdapter = new TaskTodayAdapter();
+        taskTodayAdapter = new TaskTodayAdapter(getContext(), this);
         taskRecyclerView.setAdapter(taskTodayAdapter);
         todayViewModel.getTasks().observe(getViewLifecycleOwner(), tasks -> {
             Calendar c = new GregorianCalendar();
@@ -58,7 +72,7 @@ public class TodayFragment extends Fragment {
             Calendar currentDate = new GregorianCalendar(year, month, day);
             Long myDate = currentDate.getTimeInMillis();
 
-            ArrayList<Task> tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() == (myDate)).collect(Collectors.toList());
+            tasksToday = (ArrayList<Task>) tasks.stream().filter(f -> f.getTimestamp() == (myDate)).collect(Collectors.toList());
             taskTodayAdapter.UpdateList(tasksToday);
             if (tasksToday.size() == 0) {
                 taskRecyclerView.setVisibility(View.INVISIBLE);
@@ -91,4 +105,32 @@ public class TodayFragment extends Fragment {
 
         return root;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onItemClick(int position) {
+        selectedTask = tasksToday.get(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(taskTodayAdapter.getContext());
+        builder.setTitle("Task done");
+        builder.setMessage("Did you finish this task: " + selectedTask.getTitle() + "?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String taskId = selectedTask.getId();
+                    selectedTask.setDone(true);
+                    ref.child(taskId).child("done").setValue(true);
+                    taskTodayAdapter.update();
+                }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+//    });
+    }
+
 }
