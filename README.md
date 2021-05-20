@@ -1,5 +1,7 @@
 # AndroidApp
 
+https://youtu.be/ihSnO43ga5Y
+
 This application is called PlannerZen and the purpose is to help people be more organized and motivated. In the app, you will be able to create to-do lists, in order to keep track
 of daily activities. Moreover, you can see statistics of your tasks, as well as your progress. The app will also send reminders, so that you can achieve your goal and keep you 
 motivated. I chose to do this app because I always tried to plan my activities and failed. I am sure I am not the only one with this struggle, so this application can come in hand
@@ -27,3 +29,5 @@ Won't have requirements
 
 - [x] As a user, I want to have my profile connected with Google Calendar.
 - [x] As a user, I want other people to have access to my schedule.
+
+
