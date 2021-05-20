@@ -50,7 +50,7 @@ public class SwipeItemTouchHelperTasks extends ItemTouchHelper.SimpleCallback {
             dialog.show();
         }
         else {
-//            taskAdapter.editItem(position);
+            taskAdapter.editItem(position);
         }
     }
 

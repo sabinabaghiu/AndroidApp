@@ -43,16 +43,14 @@
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 
-            <CheckBox
-                android:id="@+id/checkBox_habit_done"
-                android:layout_width="111dp"
-                android:layout_height="30dp"
+            <ImageView
+                android:id="@+id/habit_done"
+                android:layout_width="50dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:textSize="15dp"
-                android:text="Done"
-                android:textColor="@color/black" />
+                android:src="@drawable/ic_baseline_check_box_24" />
 
         </LinearLayout>
 

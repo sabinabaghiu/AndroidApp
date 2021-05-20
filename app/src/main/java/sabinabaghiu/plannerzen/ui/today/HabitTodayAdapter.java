@@ -18,16 +18,24 @@ import sabinabaghiu.plannerzen.R;
 public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.ViewHolder> {
     private ArrayList<Habit> habits = new ArrayList<>();
     private Context context;
-//    private HabitCardAdapterOnClickListener listener;
+    private HabitCardAdapterOnClickListener listener;
 
-    HabitTodayAdapter(Context context){
+    HabitTodayAdapter(Context context, HabitCardAdapterOnClickListener listener){
         this.context = context;
-//        this.listener = listener;
+        this.listener = listener;
     }
 
     public void updateList(ArrayList<Habit> habits){
         this.habits = habits;
         notifyDataSetChanged();
+    }
+
+    public void update(){
+        notifyDataSetChanged();
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     @NonNull
@@ -40,11 +48,12 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull HabitTodayAdapter.ViewHolder holder, int position) {
-        Habit currentHabit = habits.get(position);
         holder.title.setText(habits.get(position).getTitle());
         holder.icon.setImageResource(habits.get(position).getIconId());
-        holder.checkBox.setChecked(habits.get(position).isDone());
-//        holder.checkBox.setOnClickListener(view -> listener.onHabitCardClick(currentHabit));
+        holder.done.setImageResource(R.drawable.ic_baseline_check_box_24);
+        holder.done.setVisibility(View.INVISIBLE);
+        if (habits.get(position).isDone() == true)
+            holder.done.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -52,22 +61,27 @@ public class HabitTodayAdapter extends RecyclerView.Adapter<HabitTodayAdapter.Vi
         return habits.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView title;
-        ImageView icon;
-        CheckBox checkBox;
+        ImageView icon, done;
 
 
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.habit_today_title);
             icon = itemView.findViewById(R.id.icon_habit_today);
-            checkBox = itemView.findViewById(R.id.checkBox_habit_done);
+            done = itemView.findViewById(R.id.habit_done);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onHabitCardClick(getAdapterPosition());
         }
     }
 
-//    public interface HabitCardAdapterOnClickListener{
-//        void onHabitCardClick(Habit habit);
-//    }
+    public interface HabitCardAdapterOnClickListener{
+        void onHabitCardClick(int position);
+    }
 }
