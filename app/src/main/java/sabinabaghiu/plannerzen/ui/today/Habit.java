@@ -3,7 +3,7 @@ package sabinabaghiu.plannerzen.ui.today;
 
 public class Habit {
     private String title;
-    private int goal;
+    private String goal;
     private int iconId;
     private boolean isDone;
     private int count;
@@ -11,7 +11,7 @@ public class Habit {
 
     public Habit() {}
 
-    public Habit(String title, int goal, int iconId, boolean isDone, int count) {
+    public Habit(String title, String goal, int iconId, boolean isDone, int count) {
         this.title = title;
         this.goal = goal;
         this.iconId = iconId;
@@ -35,11 +35,11 @@ public class Habit {
         this.title = title;
     }
 
-    public int getGoal() {
+    public String getGoal() {
         return goal;
     }
 
-    public void setGoal(int goal) {
+    public void setGoal(String goal) {
         this.goal = goal;
     }
 

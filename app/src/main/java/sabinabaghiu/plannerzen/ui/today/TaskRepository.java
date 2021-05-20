@@ -5,8 +5,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-import sabinabaghiu.plannerzen.ui.lists.DateOrTask;
-
 public class TaskRepository {
     private static TaskRepository instance;
     private DatabaseReference myRef;
@@ -27,7 +25,7 @@ public class TaskRepository {
         task = new TaskLiveData(myRef);
     }
 
-    public void saveTask(String title, int time, boolean isImportant, Calendar date, boolean isDone){
+    public void saveTask(String title, String time, boolean isImportant, Calendar date, boolean isDone){
         myRef.push().setValue(new Task(title, time, isImportant, date, isDone));
     }
 

@@ -18,7 +18,6 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -43,13 +42,12 @@ public class AddTaskFragment extends Fragment {
             navigationView.setVisibility(View.INVISIBLE);
         tasksViewModel.init();
         titleEditText = root.findViewById(R.id.task_add_title);
-        dateEditText = root.findViewById(R.id.task_add_date);
         timeEditText = root.findViewById(R.id.task_add_time);
         isImportant = root.findViewById(R.id.switch_task_add);
         saveButton = root.findViewById(R.id.button_save_task);
         cancelButton = root.findViewById(R.id.button_cancel_task);
 
-
+        dateEditText = root.findViewById(R.id.task_add_date);
         dateEditText.setInputType(InputType.TYPE_NULL);
         dateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +73,26 @@ public class AddTaskFragment extends Fragment {
 
         saveButton.setOnClickListener(v -> {
             String title = titleEditText.getText().toString().trim();
-            int time = Integer.parseInt(timeEditText.getText().toString().trim());
+            String time = timeEditText.getText().toString().trim();
             boolean isImp = isImportant.isChecked();
-            long timestamp = currentDate.getTimeInMillis();
+            if (title.isEmpty())
+            {
+                titleEditText.requestFocus();
+                titleEditText.setError("Enter task");
+                return;
+            }
+            if (time.isEmpty())
+            {
+                timeEditText.requestFocus();
+                timeEditText.setError("Enter time");
+                return;
+            }
+            if (dateEditText.getText().toString().isEmpty())
+            {
+                dateEditText.requestFocus();
+                dateEditText.setError("Enter date");
+                return;
+            }
             tasksViewModel.saveTask(title, time, isImp, currentDate, false);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });

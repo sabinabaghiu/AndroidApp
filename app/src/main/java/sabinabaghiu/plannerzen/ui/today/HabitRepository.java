@@ -24,7 +24,7 @@ public class HabitRepository {
         habit = new HabitLiveData(myRef);
     }
 
-    public void saveHabit(String title, int goal, int iconId, boolean isDone, int count) {
+    public void saveHabit(String title, String goal, int iconId, boolean isDone, int count) {
         myRef.push().setValue(new Habit(title, goal, iconId, isDone, count));
     }
 

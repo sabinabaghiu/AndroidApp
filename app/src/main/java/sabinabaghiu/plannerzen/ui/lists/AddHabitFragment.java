@@ -57,7 +57,19 @@ public class AddHabitFragment extends Fragment {
 
         saveButton.setOnClickListener(v -> {
             String title = titleEditText.getText().toString().trim();
-            int goal = Integer.parseInt(goalEditText.getText().toString().trim());
+            String goal = goalEditText.getText().toString().trim();
+            if (title.isEmpty())
+            {
+                titleEditText.requestFocus();
+                titleEditText.setError("Enter habit");
+                return;
+            }
+            if (goal.isEmpty())
+            {
+                goalEditText.requestFocus();
+                goalEditText.setError("Enter goal");
+                return;
+            }
             habitsViewModel.saveHabit(title, goal, iconId, false, 0);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_habit_to_navigation_lists);
         });

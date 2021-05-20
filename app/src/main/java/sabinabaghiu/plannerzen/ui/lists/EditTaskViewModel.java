@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Calendar;
-
 import sabinabaghiu.plannerzen.ui.today.Task;
 import sabinabaghiu.plannerzen.ui.today.TaskRepository;
 
@@ -25,17 +23,6 @@ public class EditTaskViewModel extends ViewModel {
             task = new Task();
             editingTask = new MutableLiveData<>();
     }
-
-
-//    public void setTask(String title, int time, boolean isImportant, Calendar date, boolean isDone)
-//    {
-//        task.setTitle(title);
-//        task.setTime(time);
-//        task.setImportant(isImportant);
-//        task.setDone(isDone);
-//
-//        editingTask.setValue();
-//    }
 
     public LiveData<Task> getEditingTask() {
         return editingTask;

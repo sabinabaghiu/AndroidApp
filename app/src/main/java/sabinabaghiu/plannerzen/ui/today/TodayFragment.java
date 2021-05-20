@@ -1,10 +1,11 @@
 package sabinabaghiu.plannerzen.ui.today;
 
 import android.app.Application;
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,6 +43,7 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
     private DatabaseReference refTask, refHabit;
     private Task selectedTask;
     private Habit selectedHabit;
+    private Dialog dialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -81,6 +84,7 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
                 taskTodayAdapter.UpdateList(tasksToday);
             }
         });
+
 
 
         //habit recycler view
@@ -146,6 +150,15 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
                 refHabit.child(habitId).child("done").setValue(true);
                 refHabit.child(habitId).child("count").setValue(count+1);
                 habitTodayAdapter.update();
+                setUpDialog();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dismissPopUp();
+                    }
+                }, 2000);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -156,5 +169,20 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void setUpDialog(){
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.popup_window);
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.background));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+        dialog.show();
+    }
+
+    private void dismissPopUp()
+    {
+        dialog.dismiss();
     }
 }
