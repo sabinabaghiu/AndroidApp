@@ -40,13 +40,13 @@ public class TaskRepository {
         myRef.child(id).removeValue();
     }
 
-//    public void editTask(DateOrTask task){
-//        DatabaseReference editingTask = myRef.child(task.getTask().getId());
-//
-//        editingTask.child("done").setValue(task.getTask().isDone());
-//        editingTask.child("important").setValue(task.getTask().isImportant());
-//        editingTask.child("time").setValue(task.getTask().getTime());
-//        editingTask.child("timestamp").setValue(task.getTask().getTimestamp());
-//        editingTask.child("title").setValue(task.getTask().getTitle());
-//    }
+    public void editTask(Task task){
+        DatabaseReference editingTask = myRef.child(task.getId());
+
+        editingTask.child("done").setValue(task.isDone());
+        editingTask.child("important").setValue(task.isImportant());
+        editingTask.child("time").setValue(task.getTime());
+        editingTask.child("timestamp").setValue(task.getTimestamp());
+        editingTask.child("title").setValue(task.getTitle());
+    }
 }

@@ -74,6 +74,10 @@ public class AddHabitFragment extends Fragment {
         options.add(new SpinnerRow("Book icon", R.drawable.icon_book));
         options.add(new SpinnerRow("Sport icon", R.drawable.icon_sport));
         options.add(new SpinnerRow("Sun icon", R.drawable.icon_sun));
+        options.add(new SpinnerRow("Food icon", R.drawable.ic_baseline_fastfood_24));
+        options.add(new SpinnerRow("Money icon", R.drawable.ic_baseline_attach_money_24));
+        options.add(new SpinnerRow("Clock icon", R.drawable.ic_baseline_access_time_24));
+        options.add(new SpinnerRow("Work icon", R.drawable.ic_baseline_work_24));
         return options;
     }
 }

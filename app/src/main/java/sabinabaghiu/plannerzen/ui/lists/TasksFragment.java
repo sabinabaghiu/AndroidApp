@@ -11,9 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -31,34 +28,27 @@ import java.util.stream.Collectors;
 import sabinabaghiu.plannerzen.R;
 import sabinabaghiu.plannerzen.ui.today.Task;
 
-//public class TasksFragment extends Fragment implements TaskAdapter.OnItemClickListener{
-
 public class TasksFragment extends Fragment{
     private TasksViewModel tasksViewModel;
     private RecyclerView taskRecyclerView;
     private TextView taskTextView;
     private TaskAdapter taskAdapter;
 
-    private EditTaskViewModel editTaskViewModel;
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         tasksViewModel = new ViewModelProvider(this).get(TasksViewModel.class);
-        editTaskViewModel = new ViewModelProvider(this).get(EditTaskViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tasks, container, false);
         tasksViewModel.init();
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setVisibility(View.VISIBLE);
 
-
             //task recycler view
         taskRecyclerView = root.findViewById(R.id.recyclerViewTodoMyLists);
         taskRecyclerView.setHasFixedSize(true);
         taskTextView = root.findViewById(R.id.textViewNoTodoLists);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        taskAdapter = new TaskAdapter(getContext(),this);
         taskAdapter = new TaskAdapter(getContext());
         taskRecyclerView.setAdapter(taskAdapter);
 
@@ -83,7 +73,6 @@ public class TasksFragment extends Fragment{
             }
         });
 
-
             //swiping for edit and delete
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeItemTouchHelperTasks(taskAdapter));
         itemTouchHelper.attachToRecyclerView(taskRecyclerView);
@@ -101,8 +90,4 @@ public class TasksFragment extends Fragment{
         return root;
     }
 
-//    @Override
-//    public void onItemClick(DateOrTask selectedTask) {
-//        editTaskViewModel.select(selectedTask);
-//    }
 }

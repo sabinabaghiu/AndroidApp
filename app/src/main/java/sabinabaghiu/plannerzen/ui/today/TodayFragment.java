@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,28 +21,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.stream.Collectors;
 
 import sabinabaghiu.plannerzen.R;
 
-public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemClickListener{
+public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemClickListener, HabitTodayAdapter.HabitCardAdapterOnClickListener{
 
     private TodayViewModel todayViewModel;
     private RecyclerView taskRecyclerView;
     private RecyclerView habitRecyclerView;
     private TextView taskTextView, habitTextView;
-    private CheckBox taskCheckBox, habitCheckBox;
     private TaskTodayAdapter taskTodayAdapter;
     private HabitTodayAdapter habitTodayAdapter;
     ArrayList<Task> tasksToday;
     Application application;
-    private DatabaseReference ref;
+    private DatabaseReference refTask, refHabit;
     private Task selectedTask;
+    private Habit selectedHabit;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,7 +52,8 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
         todayViewModel.init();
 
         String userId = todayViewModel.getCurrentUser().getValue().getUid();
-        ref = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users").child(userId).child("Tasks");
+        refTask = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users").child(userId).child("Tasks");
+        refHabit = FirebaseDatabase.getInstance("https://plannerzen-43809-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Users").child(userId).child("Habits");
 
         //task recycler view
         taskRecyclerView = root.findViewById(R.id.recyclerViewTodoToday);
@@ -90,7 +88,7 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
         habitTextView = root.findViewById(R.id.textViewNoHabitsToday);
         habitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        habitTodayAdapter = new HabitTodayAdapter(getContext());
+        habitTodayAdapter = new HabitTodayAdapter(getContext(), this);
         habitRecyclerView.setAdapter(habitTodayAdapter);
         todayViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
             if (habits.size() == 0) {
@@ -118,7 +116,7 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
             public void onClick(DialogInterface dialog, int which) {
                 String taskId = selectedTask.getId();
                     selectedTask.setDone(true);
-                    ref.child(taskId).child("done").setValue(true);
+                    refTask.child(taskId).child("done").setValue(true);
                     taskTodayAdapter.update();
                 }
         });
@@ -130,7 +128,33 @@ public class TodayFragment extends Fragment implements TaskTodayAdapter.OnItemCl
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-//    });
     }
 
+    @Override
+    public void onHabitCardClick(int position) {
+        selectedHabit = todayViewModel.getHabits().getValue().get(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(habitTodayAdapter.getContext());
+        builder.setTitle("Habit done");
+        builder.setMessage("Did you " + selectedHabit.getTitle() + " today?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String habitId = selectedHabit.getId();
+                int count = selectedHabit.getCount();
+                selectedHabit.setDone(true);
+                selectedHabit.setCount(count+1);
+                refHabit.child(habitId).child("done").setValue(true);
+                refHabit.child(habitId).child("count").setValue(count+1);
+                habitTodayAdapter.update();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

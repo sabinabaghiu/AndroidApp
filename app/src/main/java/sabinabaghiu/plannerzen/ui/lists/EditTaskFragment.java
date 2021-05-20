@@ -29,7 +29,7 @@ public class EditTaskFragment extends Fragment {
     private EditText titleEditText, dateEditText, timeEditText;
     private Button saveButton, cancelButton;
     private Switch isImportant;
-    private Task task;
+    private Task selectedTask;
     int selectedYear = -1, selectedMonth = -1, selectedDay = -1;
     private DatePickerDialog datePicker;
 
@@ -37,8 +37,7 @@ public class EditTaskFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         tasksViewModel =
                 new ViewModelProvider(this).get(TasksViewModel.class);
-//        editTaskViewModel = EditTaskViewModel.getInstance();
-        editTaskViewModel = new ViewModelProvider(this).get(EditTaskViewModel.class);
+        editTaskViewModel = EditTaskViewModel.getInstance();
         View root = inflater.inflate(R.layout.fragment_edit_task, container, false);
         BottomNavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         if (navigationView != null)
@@ -51,7 +50,7 @@ public class EditTaskFragment extends Fragment {
         saveButton = root.findViewById(R.id.button_edit_save_task);
         cancelButton = root.findViewById(R.id.button_edit_cancel_task);
 
-        editTaskViewModel.getEditingTask().observe(getViewLifecycleOwner(), this :: setFields);
+        editTaskViewModel.getEditingTask().observe(getViewLifecycleOwner(), task1 ->  setFields(task1));
 
 
         dateEditText.setInputType(InputType.TYPE_NULL);
@@ -77,7 +76,7 @@ public class EditTaskFragment extends Fragment {
         });
 
         saveButton.setOnClickListener(v -> {
-//            editTaskViewModel.editTask(task);
+            editTaskViewModel.updateTask(selectedTask);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_navigation_add_task_to_navigation_lists);
         });
 
@@ -88,12 +87,12 @@ public class EditTaskFragment extends Fragment {
         return root;
     }
 
-    private void setFields(DateOrTask task){
-        titleEditText.setText(task.getTask().getTitle());
-        timeEditText.setText(task.getTask().getTime());
-        isImportant.setChecked(task.getTask().isImportant());
+    private void setFields(Task task){
+        titleEditText.setText(task.getTitle());
+//        timeEditText.setText(task.getTime());
+        isImportant.setChecked(task.isImportant());
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(task.getTask().getTimestamp());
+        calendar.setTimeInMillis(task.getTimestamp());
         if (selectedMonth == -1 && selectedYear == -1 && selectedDay == -1) {
             selectedYear = calendar.get(Calendar.YEAR);
             selectedMonth = calendar.get(Calendar.MONTH);
